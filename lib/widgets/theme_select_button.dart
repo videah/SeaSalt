@@ -1,10 +1,12 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 
+import 'package:seasalt/style.dart';
+
 /// A circular button that switches to a [ThemeData] with a fancy animation.
 class ThemeSelectButton extends StatelessWidget {
-  /// The [ThemeData] the button is used to switch to.
-  final ThemeData? theme;
+  /// The [AppTheme] the button is used to switch to.
+  final AppTheme? theme;
 
   /// The display name of the theme.
   ///
@@ -18,7 +20,8 @@ class ThemeSelectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool hideCheck = (Theme.of(context).primaryColor != theme?.primaryColor);
+    bool hideCheck =
+        (Theme.of(context).primaryColor != theme?.material?.primaryColor);
     return ThemeSwitcher(
       builder: (context) {
         return Tooltip(
@@ -26,7 +29,7 @@ class ThemeSelectButton extends StatelessWidget {
           verticalOffset: 36,
           child: TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: theme?.primaryColor,
+              backgroundColor: theme?.material?.primaryColor,
               shape: CircleBorder(
                 side: BorderSide(
                   color: Colors.white,
@@ -43,7 +46,7 @@ class ThemeSelectButton extends StatelessWidget {
             ),
             onPressed: () {
               ThemeSwitcher.of(context)!.changeTheme(
-                theme: theme,
+                theme: theme?.material,
               );
             },
           ),

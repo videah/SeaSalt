@@ -39,7 +39,7 @@ class ThemeSelectTile extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ThemeSelectButton(
                   themeName: theme.name,
-                  theme: theme.material,
+                  theme: theme,
                 ),
               ),
             ],
