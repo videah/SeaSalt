@@ -1,0 +1,190 @@
+Post:
+  path: post
+  properties:
+    id:
+      description: " The ID number of the post."
+      type: int
+    file:
+      description: " The post's high-res file info."
+      type: PostFile
+    preview:
+      description: " The post's lower-res preview file info."
+      type: PostPreview
+    sample:
+      description: " The post's sample/thumbnail file info."
+      type: PostSample
+    score:
+      description: " The post's user score."
+      type: PostScore
+    tags:
+      description: " The tags listed on the post."
+      type: PostTags
+    locked_tags:
+      description: " A list of tags that are locked on the post."
+      type: array
+      items:
+        type: string
+    change_seq:
+      type: int
+    flags:
+      type: PostFlags
+    rating:
+      description: " The post's content rating. Either SAFE, EXPLICIT, or QUESTIONABLE."
+      type: PostRating
+    fav_count:
+      description: " How many people have favorited the post."
+      type: int
+    sources:
+      description: " A list of source URL's for the post."
+      type: array
+      items:
+        type: string
+    pools:
+      description: " An array of Pool IDs that the post is a part of."
+      type: array
+      items:
+        type: string
+    relationships:
+      type: PostRelationships
+    approver_id:
+      description: " The ID of the user that approved the post, if available."
+      type: string
+    uploader_id:
+      description: " The ID of the user that uploaded the post."
+      type: string
+    description:
+      description: " The post's description."
+      type: string
+    comment_count:
+      description: " The number of comments on the post."
+      type: int
+    is_favorited:
+      description: " Will return if the authenticated user has favorited the post or not."
+      type: bool
+
+PostFile:
+  path: post
+  properties:
+    width:
+      description: " The width of the post."
+      type: int
+    height:
+      description: " The height of the post."
+      type: int
+    ext:
+      description: " The file’s extension."
+      type: string
+    size:
+      description: " The size of the file in bytes."
+      type: int
+    md5:
+      description: " The MD5 hash of the file."
+      type: string
+    url:
+      description: " The URL where the file is hosted on E6."
+      type: string
+
+PostPreview:
+  path: post
+  properties:
+    width:
+      type: int
+    height:
+      type: int
+    url:
+      type: string
+
+PostSample:
+  path: post
+  properties:
+    has:
+      type: bool
+    width:
+      type: int
+    height:
+      type: int
+    url:
+      type: string
+
+PostScore:
+  path: post
+  properties:
+    up:
+      type: int
+    down:
+      type: int
+    total:
+      type: int
+
+PostTags:
+  path: post
+  properties:
+    general:
+      type: array
+      items:
+        type: string
+    species:
+      type: array
+      items:
+        type: string
+    character:
+      type: array
+      items:
+        type: string
+    artist:
+      type: array
+      items:
+        type: string
+    invalid:
+      type: array
+      items:
+        type: string
+    lore:
+      type: array
+      items:
+        type: string
+    meta:
+      type: array
+      items:
+        type: string
+
+PostFlags:
+  path: post
+  properties:
+    pending:
+      type: bool
+    flagged:
+      type: bool
+    note_locked:
+      type: bool
+    status_locked:
+      type: bool
+    rating_locked:
+      type: bool
+    deleted:
+      type: bool
+
+PostRating:
+  path: post
+  type: enum
+  properties:
+    SAFE:
+      value: s
+    EXPLICIT:
+      value: e
+    QUESTIONABLE:
+      value: q
+
+PostRelationships:
+  path: post
+  properties:
+    parent_id:
+      type: string
+    has_children:
+      type: bool
+    has_active_children:
+      type: bool
+    children:
+      type: array
+      items:
+        type: string
