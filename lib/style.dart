@@ -5,7 +5,13 @@ import 'package:flutter/material.dart';
 class AppTheme extends ExtendedTheme {
   final String name;
 
-  AppTheme(this.name, ThemeData material) : super(material: material);
+  final Color positiveScoreColor;
+  final Color negativeScoreColor;
+
+  AppTheme(this.name, ThemeData material,
+      {this.positiveScoreColor = Colors.green,
+      this.negativeScoreColor = Colors.red})
+      : super(material: material);
 }
 
 final appThemes = {
@@ -15,6 +21,7 @@ final appThemes = {
       primaryColor: "#012e57".toColor(),
       scaffoldBackgroundColor: "#012e57".toColor(),
       canvasColor: "#012e57".toColor(),
+      cardColor: "#284a81".toColor(),
     ),
   ),
   "bloodlust": AppTheme(
@@ -23,6 +30,7 @@ final appThemes = {
       primaryColor: "#222".toColor(),
       scaffoldBackgroundColor: "#222".toColor(),
       canvasColor: "#222".toColor(),
+      cardColor: "#404040".toColor(),
     ),
   ),
   "serpent": AppTheme(
@@ -31,14 +39,13 @@ final appThemes = {
       primaryColor: "#dacf6b".toColor(),
       scaffoldBackgroundColor: "#dacf6b".toColor(),
       canvasColor: "#dacf6b".toColor(),
+      cardColor: "#fff6a5".toColor(),
       primaryIconTheme: IconThemeData(
         color: Colors.black,
       ),
       primaryTextTheme: TextTheme(
-        headline6: TextStyle(
-          color: Colors.black
-        )
-      )
+        headline6: TextStyle(color: Colors.black),
+      ),
     ),
   ),
   "pony": AppTheme(
@@ -47,6 +54,7 @@ final appThemes = {
       primaryColor: "#2f175c".toColor(),
       scaffoldBackgroundColor: "#2f175c".toColor(),
       canvasColor: "#2f175c".toColor(),
+      cardColor: "#503a7a".toColor(),
     ),
   )
 };

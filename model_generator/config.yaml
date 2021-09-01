@@ -167,6 +167,8 @@ PostFlags:
 PostRating:
   path: post
   type: enum
+  generate_map: true
+  generate_extensions: true
   properties:
     SAFE:
       value: s
