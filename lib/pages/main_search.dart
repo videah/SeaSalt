@@ -5,19 +5,17 @@ import 'package:seasalt/services/posts_service.dart';
 import 'package:seasalt/widgets/image_tile.dart';
 
 class MainSearchPage extends StatefulWidget {
-
   @override
   _MainSearchPageState createState() => _MainSearchPageState();
 }
 
 class _MainSearchPageState extends State<MainSearchPage> {
-
   E6Post? test = E6Post();
 
   Future testAPI() async {
     final posts = PostsService.withClient(client);
     var response = await posts.getPostsWithTags("videah");
-    var post = response.data?.posts?.first;
+    var post = response.data?.posts?[4];
     setState(() {
       test = post;
     });
@@ -28,7 +26,19 @@ class _MainSearchPageState extends State<MainSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SeaSalt"),
+        title: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  hintText: "Search...",
+                  border: UnderlineInputBorder()
+                ),
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
@@ -46,11 +56,13 @@ class _MainSearchPageState extends State<MainSearchPage> {
         ],
       ),
       body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 256.0),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 256.0,
+        ),
         itemBuilder: (context, i) {
           return ImageTile(post: test);
         },
-      )
+      ),
     );
   }
 }
