@@ -8,10 +8,10 @@ import 'package:seasalt/models/post/post_flags.dart';
 import 'package:seasalt/models/post/post_rating.dart';
 import 'package:seasalt/models/post/post_relationships.dart';
 
-part 'post.g.dart';
+part 'e6_post.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Post {
+class E6Post {
   /// The ID number of the post.
   @JsonKey(name: 'id', includeIfNull: false)
   final int? id;
@@ -53,10 +53,10 @@ class Post {
   final PostRelationships? relationships;
   /// The ID of the user that approved the post, if available.
   @JsonKey(name: 'approver_id', includeIfNull: false)
-  final String? approverId;
+  final int? approverId;
   /// The ID of the user that uploaded the post.
   @JsonKey(name: 'uploader_id', includeIfNull: false)
-  final String? uploaderId;
+  final int? uploaderId;
   /// The post's description.
   @JsonKey(name: 'description', includeIfNull: false)
   final String? description;
@@ -67,7 +67,7 @@ class Post {
   @JsonKey(name: 'is_favorited', includeIfNull: false)
   final bool? isFavorited;
 
-  const Post({
+  const E6Post({
     this.id,
     this.file,
     this.preview,
@@ -89,8 +89,8 @@ class Post {
     this.isFavorited,
   });
 
-  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+  factory E6Post.fromJson(Map<String, dynamic> json) => _$E6PostFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PostToJson(this);
+  Map<String, dynamic> toJson() => _$E6PostToJson(this);
 
 }

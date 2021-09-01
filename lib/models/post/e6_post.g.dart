@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post.dart';
+part of 'e6_post.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Post _$PostFromJson(Map<String, dynamic> json) {
-  return Post(
+E6Post _$E6PostFromJson(Map<String, dynamic> json) {
+  return E6Post(
     id: json['id'] as int?,
     file: json['file'] == null
         ? null
@@ -40,15 +40,15 @@ Post _$PostFromJson(Map<String, dynamic> json) {
         ? null
         : PostRelationships.fromJson(
             json['relationships'] as Map<String, dynamic>),
-    approverId: json['approver_id'] as String?,
-    uploaderId: json['uploader_id'] as String?,
+    approverId: json['approver_id'] as int?,
+    uploaderId: json['uploader_id'] as int?,
     description: json['description'] as String?,
     commentCount: json['comment_count'] as int?,
     isFavorited: json['is_favorited'] as bool?,
   );
 }
 
-Map<String, dynamic> _$PostToJson(Post instance) {
+Map<String, dynamic> _$E6PostToJson(E6Post instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

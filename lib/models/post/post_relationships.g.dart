@@ -8,11 +8,11 @@ part of 'post_relationships.dart';
 
 PostRelationships _$PostRelationshipsFromJson(Map<String, dynamic> json) {
   return PostRelationships(
-    parentId: json['parent_id'] as String?,
+    parentId: json['parent_id'] as int?,
     hasChildren: json['has_children'] as bool?,
     hasActiveChildren: json['has_active_children'] as bool?,
     children:
-        (json['children'] as List<dynamic>?)?.map((e) => e as String).toList(),
+        (json['children'] as List<dynamic>?)?.map((e) => e as int).toList(),
   );
 }
 

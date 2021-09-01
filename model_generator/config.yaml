@@ -1,4 +1,4 @@
-Post:
+E6Post:
   path: post
   properties:
     id:
@@ -48,10 +48,10 @@ Post:
       type: PostRelationships
     approver_id:
       description: " The ID of the user that approved the post, if available."
-      type: string
+      type: int
     uploader_id:
       description: " The ID of the user that uploaded the post."
-      type: string
+      type: int
     description:
       description: " The post's description."
       type: string
@@ -179,7 +179,7 @@ PostRelationships:
   path: post
   properties:
     parent_id:
-      type: string
+      type: int
     has_children:
       type: bool
     has_active_children:
@@ -187,4 +187,12 @@ PostRelationships:
     children:
       type: array
       items:
-        type: string
+        type: int
+
+PostResponse:
+  path: post
+  properties:
+    posts:
+      type: array
+      items:
+        type: E6Post

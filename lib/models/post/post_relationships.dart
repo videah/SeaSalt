@@ -5,13 +5,13 @@ part 'post_relationships.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PostRelationships {
   @JsonKey(name: 'parent_id', includeIfNull: false)
-  final String? parentId;
+  final int? parentId;
   @JsonKey(name: 'has_children', includeIfNull: false)
   final bool? hasChildren;
   @JsonKey(name: 'has_active_children', includeIfNull: false)
   final bool? hasActiveChildren;
   @JsonKey(name: 'children', includeIfNull: false)
-  final List<String>? children;
+  final List<int>? children;
 
   const PostRelationships({
     this.parentId,

@@ -27,6 +27,7 @@ dependencies:
   supercharged: ^2.0.0
   animated_theme_switcher: ^2.0.1
   json_serializable: ^4.1.0
+  backfit: ^0.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -36,8 +37,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.1.1
   model_generator: ^5.1.1
-  build_runner: ^1.11.5
+  backfit_generator: ^0.0.2
+
+# TODO: Get rid of these dependency overrides when possible.
+dependency_overrides:
+  meta: 1.7.0
+  analyzer: 2.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
