@@ -3,6 +3,7 @@ import 'package:seasalt/models/post/e6_post.dart';
 import 'package:seasalt/network.dart';
 import 'package:seasalt/services/posts_service.dart';
 import 'package:seasalt/widgets/image_tile.dart';
+import 'package:seasalt/widgets/search_app_bar.dart';
 
 class MainSearchPage extends StatefulWidget {
   @override
@@ -25,36 +26,7 @@ class _MainSearchPageState extends State<MainSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  hintText: "Search...",
-                  border: UnderlineInputBorder()
-                ),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            tooltip: "Settings",
-            onPressed: () {
-              Navigator.of(context).pushNamed("/settings");
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.download_rounded),
-            onPressed: () {
-              testAPI();
-            },
-          )
-        ],
-      ),
+      appBar: SearchAppBar(),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 256.0,
