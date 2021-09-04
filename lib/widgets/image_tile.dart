@@ -3,6 +3,7 @@ import 'package:extended_theme/extended_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:octo_image/octo_image.dart';
+import 'package:seasalt/pages/post_page.dart';
 import 'package:supercharged/supercharged.dart';
 
 import 'package:seasalt/models/post/e6_post.dart';
@@ -35,40 +36,54 @@ class ImageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: _getBorderColor(context),
-      clipBehavior: Clip.antiAlias,
-      child: Stack(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
-                    width: post?.file?.width?.toDouble(),
-                    color: Theme.of(context).cardColor,
-                    child: OctoImage(
-                      image: CachedNetworkImageProvider(
-                        post?.preview?.url ??
-                            "https://videah.xyz/images/icon.png",
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => PostPage(
+              post: post,
+            ),
+          ),
+        );
+      },
+      child: Card(
+        color: _getBorderColor(context),
+        clipBehavior: Clip.antiAlias,
+        child: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      width: post?.file?.width?.toDouble(),
+                      color: Theme.of(context).cardColor,
+                      child: Hero(
+                        tag: "${post?.id}",
+                        child: OctoImage(
+                          image: CachedNetworkImageProvider(
+                            post?.preview?.url ??
+                                "https://videah.xyz/images/icon.png",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-              PostDescriptor(
-                rating: post?.rating ?? PostRating.SAFE,
-                commentCount: post?.commentCount ?? 0,
-                favCount: post?.favCount ?? 0,
-                score: post?.score?.total ?? 0,
-              ),
-            ],
-          )
-        ],
+                PostDescriptor(
+                  rating: post?.rating ?? PostRating.SAFE,
+                  commentCount: post?.commentCount ?? 0,
+                  favCount: post?.favCount ?? 0,
+                  score: post?.score?.total ?? 0,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
