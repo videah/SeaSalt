@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/cubits/search_state.dart';
 
@@ -43,9 +44,10 @@ class SearchInputBox extends StatelessWidget {
             context.read<SearchCubit>().search(tags);
           },
           decoration: InputDecoration(
+            isDense: true,
             filled: true,
             hintText: "Search...",
-            contentPadding: const EdgeInsets.fromLTRB(12, 22, 12, 14),
+            contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
             border: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(4),
               borderSide: BorderSide(width: 0, style: BorderStyle.none),
