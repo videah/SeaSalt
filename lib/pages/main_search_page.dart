@@ -2,30 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/cubits/search_state.dart';
-import 'package:seasalt/models/post/e6_post.dart';
-import 'package:seasalt/network.dart';
-import 'package:seasalt/services/posts_service.dart';
+
 import 'package:seasalt/widgets/image_tile.dart';
 import 'package:seasalt/widgets/search_app_bar.dart';
 
-class MainSearchPage extends StatefulWidget {
-  @override
-  _MainSearchPageState createState() => _MainSearchPageState();
-}
-
-class _MainSearchPageState extends State<MainSearchPage> {
-  E6Post? test = E6Post();
-
-  Future testAPI() async {
-    final posts = PostsService.withClient(client);
-    var response = await posts.getPostsWithTags("videah");
-    var post = response.data?.posts?[4];
-    setState(() {
-      test = post;
-    });
-    print("URL: ${post?.file?.url}");
-  }
-
+class MainSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
