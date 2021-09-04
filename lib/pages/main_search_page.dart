@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/cubits/search_state.dart';
 
@@ -27,7 +28,10 @@ class MainSearchPage extends StatelessWidget {
                 maxCrossAxisExtent: 256.0,
               ),
               itemBuilder: (context, i) {
-                return ImageTile(post: state.posts[i]);
+                return FadeIn(
+                  duration: Duration(milliseconds: 250),
+                  child: ImageTile(post: state.posts[i]),
+                );
               },
             );
           },

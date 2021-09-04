@@ -33,6 +33,7 @@ dependencies:
   bloc: ^7.1.0
   flutter_bloc: ^7.2.0
   flutter_cache_manager: ^3.1.2
+  flutter_fadein: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
