@@ -14,12 +14,26 @@ class SettingsPage extends StatelessWidget {
         ),
         body: ListView(
           children: [
+            AccountManagementTile(),
+            Divider(),
             ThemeSelectTile(),
             Divider(),
             CacheManagementTile(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class AccountManagementTile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text("Sign In"),
+      onTap: () {
+        Navigator.of(context).pushNamed("/sign-in");
+      },
     );
   }
 }

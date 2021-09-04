@@ -7,6 +7,7 @@ import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/network.dart';
 import 'package:seasalt/pages/main_search_page.dart';
 import 'package:seasalt/pages/settings_page.dart';
+import 'package:seasalt/pages/sign_in_page.dart';
 import 'package:seasalt/repositories/search_repository.dart';
 import 'package:seasalt/services/posts_service.dart';
 import 'package:seasalt/style.dart';
@@ -38,6 +39,7 @@ class SeaSalt extends StatelessWidget {
                       child: MainSearchPage(),
                     ),
                 "/settings": (context) => SettingsPage(),
+                "/sign-in": (context) => SignInPage(),
               },
             );
           },
