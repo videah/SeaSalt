@@ -16,12 +16,6 @@ class MainSearchPage extends StatelessWidget {
         onRefresh: context.read<SearchCubit>().refresh,
         child: BlocBuilder<SearchCubit, SearchState>(
           builder: (context, state) {
-            // No results yet, show loading indicator.
-            if (!(state is SearchResult))
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-
             return GridView.builder(
               itemCount: state.posts.length,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

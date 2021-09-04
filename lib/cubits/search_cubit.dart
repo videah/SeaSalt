@@ -15,7 +15,8 @@ class SearchCubit extends Cubit<SearchState> {
   /// Pulls posts from e621/e926 using provided tags.
   Future<void> search(String tags) async {
     // Show loading indicators and potentially store tags for later use.
-    emit(SearchLoading(tags: tags));
+    // If there's already posts loaded we keep them displayed during the search.
+    emit(SearchLoading(tags: tags, posts: state.posts));
 
     // Pull posts using the provided tags.
     final posts = await repository.search(state.tags);
