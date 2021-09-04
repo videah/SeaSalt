@@ -43,7 +43,7 @@ E6Post:
       description: " An array of Pool IDs that the post is a part of."
       type: array
       items:
-        type: string
+        type: int
     relationships:
       type: PostRelationships
     approver_id:

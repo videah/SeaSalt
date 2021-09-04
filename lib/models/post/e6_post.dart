@@ -48,7 +48,7 @@ class E6Post {
   final List<String>? sources;
   /// An array of Pool IDs that the post is a part of.
   @JsonKey(name: 'pools', includeIfNull: false)
-  final List<String>? pools;
+  final List<int>? pools;
   @JsonKey(name: 'relationships', includeIfNull: false)
   final PostRelationships? relationships;
   /// The ID of the user that approved the post, if available.

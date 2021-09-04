@@ -35,7 +35,7 @@ E6Post _$E6PostFromJson(Map<String, dynamic> json) {
     favCount: json['fav_count'] as int?,
     sources:
         (json['sources'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    pools: (json['pools'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    pools: (json['pools'] as List<dynamic>?)?.map((e) => e as int).toList(),
     relationships: json['relationships'] == null
         ? null
         : PostRelationships.fromJson(

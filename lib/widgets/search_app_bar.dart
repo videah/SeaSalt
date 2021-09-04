@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seasalt/cubits/search_cubit.dart';
 
 class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
   @override final Size preferredSize;
@@ -25,8 +26,8 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 6.0, left: 6.0, bottom: 6.0, right: 50.0),
             child: TextField(
-              onTap: () {
-                print("text");
+              onSubmitted: (tags) {
+                context.read<SearchCubit>().search(tags);
               },
               decoration: InputDecoration(
                 filled: true,
@@ -40,26 +41,6 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
             ),
           ),
         ),
-        // AppBar(
-        //   title: SearchBar(
-        //     controller: _searchController,
-        //   ),
-        //   actions: [
-        //     IconButton(
-        //       icon: Icon(Icons.settings),
-        //       tooltip: "Settings",
-        //       onPressed: () {
-        //         Navigator.of(context).pushNamed("/settings");
-        //       },
-        //     ),
-        //     IconButton(
-        //       icon: Icon(Icons.download_rounded),
-        //       onPressed: () {
-        //         testAPI();
-        //       },
-        //     )
-        //   ],
-        // ),
       ],
     );
   }
