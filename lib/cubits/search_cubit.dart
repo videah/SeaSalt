@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:seasalt/cubits/search_state.dart';
 
+import 'package:seasalt/cubits/search_state.dart';
 import 'package:seasalt/repositories/search_repository.dart';
 
+/// Handles all of the business logic for [MainSearchPage].
 class SearchCubit extends Cubit<SearchState> {
   final SearchRepository repository;
 
@@ -11,6 +12,7 @@ class SearchCubit extends Cubit<SearchState> {
     search("");
   }
 
+  /// Pulls posts from e621/e926 using provided tags.
   Future<void> search(String tags) async {
     // Show loading indicators and potentially store tags for later use.
     emit(SearchLoading(tags: tags));
@@ -26,5 +28,6 @@ class SearchCubit extends Cubit<SearchState> {
     }
   }
 
+  /// Performs a search with the tags searched with last.
   Future<void> refresh() async => search(state.tags);
 }

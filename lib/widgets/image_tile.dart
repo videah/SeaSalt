@@ -22,6 +22,7 @@ class ImageTile extends StatelessWidget {
 
   const ImageTile({Key? key, required this.post}) : super(key: key);
 
+  /// Generates an appropriate border color for posts that have relationships.
   Color _getBorderColor(BuildContext context) {
     if (post?.relationships?.hasChildren ?? false) {
       return "#0f0".toColor();
