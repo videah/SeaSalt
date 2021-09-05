@@ -50,6 +50,7 @@ dev_dependencies:
   backfit_generator: ^0.0.2
   hive_generator: ^1.1.0
   flutter_secure_storage: ^5.0.0-beta.5
+  url_launcher: ^6.0.10
 
 # TODO: Get rid of these dependency overrides when possible.
 dependency_overrides:

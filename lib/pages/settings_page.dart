@@ -1,6 +1,7 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seasalt/style.dart';
 import 'package:seasalt/widgets/theme_select_button.dart';
 
@@ -29,10 +30,42 @@ class SettingsPage extends StatelessWidget {
 class AccountManagementTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text("Sign In"),
-      onTap: () {
-        Navigator.of(context).pushNamed("/sign-in");
+    return ValueListenableBuilder<Box>(
+      valueListenable: Hive.box("secrets").listenable(),
+      builder: (context, secrets, widget) {
+        if (!secrets.containsKey("credentials")) {
+          return ListTile(
+            title: Text("Sign In"),
+            onTap: () async {
+              var success =
+                  await Navigator.of(context).pushNamed("/sign-in");
+              await Future.delayed(Duration(milliseconds: 100));
+              if (success == true) ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.green,
+                  content: ListTile(
+                    title: Text("Successfully signed in."),
+                    leading: Icon(Icons.check, color: Colors.white),
+                  )
+                ),
+              );
+            },
+          );
+        } else {
+          return Column(
+            children: [
+              ListTile(
+                title: Text("Signed in as: ${secrets.get("username")}"),
+              ),
+              ListTile(
+                title: Text("Sign Out"),
+                onTap: () async {
+                  await secrets.delete("credentials");
+                },
+              ),
+            ],
+          );
+        }
       },
     );
   }

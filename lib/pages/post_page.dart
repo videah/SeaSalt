@@ -22,7 +22,7 @@ class PostPage extends StatelessWidget {
             child: OctoImage(
               image: CachedNetworkImageProvider(
                 post?.preview?.url ??
-                    "https://videah.xyz/images/icon.png",
+                    "https://i.imgur.com/TVJnMuP.png",
               ),
               fit: BoxFit.cover,
             ),

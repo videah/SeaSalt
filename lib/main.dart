@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:seasalt/cubits/login_cubit.dart';
 
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/network.dart';
 import 'package:seasalt/pages/main_search_page.dart';
 import 'package:seasalt/pages/settings_page.dart';
 import 'package:seasalt/pages/sign_in_page.dart';
+import 'package:seasalt/repositories/login_repository.dart';
 import 'package:seasalt/repositories/search_repository.dart';
 import 'package:seasalt/services/posts_service.dart';
 import 'package:seasalt/style.dart';
@@ -44,10 +46,10 @@ Future<void> setupEncryptedBox() async {
   if (encryptionKey != null) {
     var decodedKey = base64Url.decode(encryptionKey);
     await Hive.openBox(
-      "credentials",
+      "secrets",
       encryptionCipher: HiveAesCipher(decodedKey),
     );
-    print("Opened encrypted credentials box.");
+    print("Opened encrypted secrets box.");
   } else {
     print("ERROR: Could not get local database encryption key. 😬");
   }
@@ -80,7 +82,14 @@ class SeaSalt extends StatelessWidget {
                       child: MainSearchPage(),
                     ),
                 "/settings": (context) => SettingsPage(),
-                "/sign-in": (context) => SignInPage(),
+                "/sign-in": (context) => BlocProvider(
+                  create: (context) => LoginCubit(
+                    repository: LoginRepository(
+                      service: PostsService.withClient(client),
+                    ),
+                  ),
+                  child: SignInPage(),
+                ),
               },
             );
           },
