@@ -3,11 +3,15 @@ import 'package:bloc/bloc.dart';
 import 'package:seasalt/cubits/search_state.dart';
 import 'package:seasalt/repositories/search_repository.dart';
 
-/// Handles all of the business logic for [MainSearchPage].
+/// A cubit that handles all of the business logic for [MainSearchPage].
 class SearchCubit extends Cubit<SearchState> {
+  /// A repository that provides the methods for pulling from the API.
+  ///
+  /// This is meant to be a form of dependency injection but it's not actually
+  /// swappable at the moment. TODO: Do proper dependency injection on cubits.
   final SearchRepository repository;
 
-  SearchCubit({required this.repository}) : super(SearchInitial(tags: "")) {
+  SearchCubit({required this.repository}) : super(SearchInitial()) {
     // Searching empty just gives us the "front page" with the newest posts.
     search("");
   }
@@ -21,7 +25,7 @@ class SearchCubit extends Cubit<SearchState> {
     // Pull posts using the provided tags.
     final posts = await repository.search(state.tags);
 
-    // Present posts to the the user if we got some, otherwise display an error.
+    // If we actually got posts display them to the user, else we show an error.
     if (posts != null) {
       emit(SearchResult(tags: state.tags, posts: posts));
     } else {

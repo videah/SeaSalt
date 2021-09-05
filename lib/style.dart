@@ -2,6 +2,7 @@ import 'package:supercharged/supercharged.dart';
 import 'package:extended_theme/extended_theme.dart';
 import 'package:flutter/material.dart';
 
+/// A data class to define themes in an easily switchable and composable way.
 class AppTheme extends ExtendedTheme {
   final String name;
   final String displayName;

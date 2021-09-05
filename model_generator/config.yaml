@@ -88,62 +88,79 @@ PostPreview:
   path: post
   properties:
     width:
+      description: " The width of the post preview."
       type: int
     height:
+      description: " The height of the post preview."
       type: int
     url:
+      description: " The URL where the preview file is hosted on E6."
       type: string
 
 PostSample:
   path: post
   properties:
     has:
+      description: " If the post has a sample/thumbnail or not."
       type: bool
     width:
+      description: " The width of the post sample."
       type: int
     height:
+      description: " The height of the post sample."
       type: int
     url:
+      description: " The URL where the sample file is hosted on E6."
       type: string
 
 PostScore:
   path: post
   properties:
     up:
+      description: " The number of times voted up."
       type: int
     down:
+      description: " A negative number representing the number of times voted down."
       type: int
     total:
+      description: " The total score (up + down)."
       type: int
 
 PostTags:
   path: post
   properties:
     general:
+      description: " An array of all the general tags on the post."
       type: array
       items:
         type: string
     species:
+      description: " An array of all the species tags on the post."
       type: array
       items:
         type: string
     character:
+      description: " An array of all the character tags on the post."
       type: array
       items:
         type: string
     artist:
+      description: " An array of all the artist tags on the post."
       type: array
       items:
         type: string
     invalid:
+      description: " An array of all the invalid tags on the post."
       type: array
       items:
         type: string
     lore:
+      description: " An array of all the lore tags on the post."
       type: array
       items:
         type: string
     meta:
+      description: " An array of all the meta tags on the post."
       type: array
       items:
         type: string
@@ -152,16 +169,22 @@ PostFlags:
   path: post
   properties:
     pending:
+      description: " If the post is pending approval."
       type: bool
     flagged:
+      description: " If the post is flagged for deletion."
       type: bool
     note_locked:
+      description: " If the post has its notes locked."
       type: bool
     status_locked:
+      description: " If the post's status has been locked."
       type: bool
     rating_locked:
+      description: " If the post's rating has been locked."
       type: bool
     deleted:
+      description: " If the post has been deleted."
       type: bool
 
 PostRating:
@@ -171,22 +194,28 @@ PostRating:
   generate_extensions: true
   properties:
     SAFE:
+      description: " The post should be safe for work."
       value: s
     EXPLICIT:
+      description: " The post is riding the line making it NSFW."
       value: e
     QUESTIONABLE:
+      description: " The post is straight up NSFW."
       value: q
 
 PostRelationships:
   path: post
   properties:
     parent_id:
+      description: " The ID of the post's parent, if it has one."
       type: int
     has_children:
+      description: " If the post has child posts."
       type: bool
     has_active_children:
       type: bool
     children:
+      description: " A list of child post IDs that are linked to the post, if it has any."
       type: array
       items:
         type: int
@@ -195,6 +224,7 @@ PostResponse:
   path: post
   properties:
     posts:
+      description: " The actual posts!"
       type: array
       items:
         type: E6Post

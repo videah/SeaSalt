@@ -10,7 +10,7 @@ import 'package:seasalt/models/post/e6_post.dart';
 import 'package:seasalt/models/post/post_rating.dart';
 import 'package:seasalt/style.dart';
 
-/// A widget that presents information about a [E6Post].
+/// A widget that presents information about an [E6Post].
 ///
 /// This is designed to look and function as close as possible to the actual
 /// tiles you see on e621. It shows a thumbnail along with a score users have
@@ -89,10 +89,24 @@ class ImageTile extends StatelessWidget {
   }
 }
 
+/// A widget that defines the bottom information bar on an [ImageTile].
+///
+/// This emulates the bar below the thumbnail on e621/e926 that displays
+/// information about the post in a compact row.
 class PostDescriptor extends StatelessWidget {
+  /// The content rating of the post.
   final PostRating? rating;
+
+  /// The total number of comments on the post.
   final int? commentCount;
+
+  /// The number of favourites on the post.
   final int? favCount;
+
+  /// The total score of the post.
+  ///
+  /// If this is above 0 the text/icon will be positive, if it is below 0 they
+  /// will be negative. If it is exactly 0 it will be neutral.
   final int? score;
 
   const PostDescriptor(
@@ -103,6 +117,7 @@ class PostDescriptor extends StatelessWidget {
       required this.score})
       : super(key: key);
 
+  /// Converts the [rating] into an appropriate color to display on the bar.
   Color _getRatingColor() {
     switch (rating) {
       case PostRating.SAFE:
@@ -150,7 +165,9 @@ class PostDescriptor extends StatelessWidget {
   }
 }
 
+/// A widget that displays a posts score with an icon and appropriate color.
 class ScoreIndicator extends StatelessWidget {
+  /// The total score of the post.
   final int? score;
 
   const ScoreIndicator({Key? key, @required this.score}) : super(key: key);

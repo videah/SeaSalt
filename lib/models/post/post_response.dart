@@ -5,6 +5,7 @@ part 'post_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PostResponse {
+  /// The actual posts!
   @JsonKey(name: 'posts', includeIfNull: false)
   final List<E6Post>? posts;
 

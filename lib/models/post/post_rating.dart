@@ -1,10 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 
 enum PostRating {
+  /// The post should be safe for work.
   @JsonValue('s')
   SAFE,
+  /// The post is riding the line making it NSFW.
   @JsonValue('e')
   EXPLICIT,
+  /// The post is straight up NSFW.
   @JsonValue('q')
   QUESTIONABLE,
 }

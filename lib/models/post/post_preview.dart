@@ -4,10 +4,13 @@ part 'post_preview.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PostPreview {
+  /// The width of the post preview.
   @JsonKey(name: 'width', includeIfNull: false)
   final int? width;
+  /// The height of the post preview.
   @JsonKey(name: 'height', includeIfNull: false)
   final int? height;
+  /// The URL where the preview file is hosted on E6.
   @JsonKey(name: 'url', includeIfNull: false)
   final String? url;
 
