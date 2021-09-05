@@ -10,24 +10,51 @@ class AppTheme extends ExtendedTheme {
   final Color positiveScoreColor;
   final Color negativeScoreColor;
 
-  AppTheme(this.displayName, this.name, ThemeData material,
-      {this.positiveScoreColor = Colors.green,
-      this.negativeScoreColor = Colors.red})
-      : super(material: material);
+  final Color? artistTagColor;
+  final Color? characterTagColor;
+  final Color? copyrightTagColor;
+  final Color? speciesTagColor;
+  final Color? generalTagColor;
+  final Color? metaTagColor;
+  final Color? loreTagColor;
+
+  AppTheme(
+    this.displayName,
+    this.name,
+    ThemeData material, {
+    this.artistTagColor,
+    this.characterTagColor,
+    this.copyrightTagColor,
+    this.speciesTagColor,
+    this.generalTagColor,
+    this.metaTagColor,
+    this.loreTagColor,
+    this.positiveScoreColor = Colors.green,
+    this.negativeScoreColor = Colors.red,
+  }) : super(material: material);
 }
 
 final appThemes = {
   "hexagon": AppTheme(
-    "Hexagon", "hexagon",
+    "Hexagon",
+    "hexagon",
     ThemeData.dark().copyWith(
       primaryColor: "#012e57".toColor(),
       scaffoldBackgroundColor: "#012e57".toColor(),
       canvasColor: "#012e57".toColor(),
       cardColor: "#284a81".toColor(),
     ),
+    artistTagColor: "#f2ac08".toColor(),
+    copyrightTagColor: "#d0d".toColor(),
+    characterTagColor: "#0a0".toColor(),
+    speciesTagColor: "#ed5d1f".toColor(),
+    generalTagColor: "#b4c7d9".toColor(),
+    metaTagColor: Colors.white,
+    loreTagColor: "#282".toColor(),
   ),
   "bloodlust": AppTheme(
-    "Bloodlust", "bloodlust",
+    "Bloodlust",
+    "bloodlust",
     ThemeData.dark().copyWith(
       primaryColor: "#222".toColor(),
       scaffoldBackgroundColor: "#222".toColor(),
@@ -36,7 +63,8 @@ final appThemes = {
     ),
   ),
   "serpent": AppTheme(
-    "Serpent", "serpent",
+    "Serpent",
+    "serpent",
     ThemeData.light().copyWith(
       primaryColor: "#dacf6b".toColor(),
       scaffoldBackgroundColor: "#dacf6b".toColor(),
@@ -51,7 +79,8 @@ final appThemes = {
     ),
   ),
   "pony": AppTheme(
-    "Pony", "pony",
+    "Pony",
+    "pony",
     ThemeData.dark().copyWith(
       primaryColor: "#2f175c".toColor(),
       scaffoldBackgroundColor: "#2f175c".toColor(),

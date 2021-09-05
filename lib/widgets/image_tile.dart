@@ -38,13 +38,15 @@ class ImageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => PostPage(
-              post: post,
+        if (post != null) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PostPage(
+                post: post!,
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
       child: Card(
         color: _getBorderColor(context),
@@ -68,7 +70,7 @@ class ImageTile extends StatelessWidget {
                             post?.preview?.url ??
                                 "https://i.imgur.com/TVJnMuP.png",
                           ),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
                     ),
