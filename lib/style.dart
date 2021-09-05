@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 
 class AppTheme extends ExtendedTheme {
   final String name;
+  final String displayName;
 
   final Color positiveScoreColor;
   final Color negativeScoreColor;
 
-  AppTheme(this.name, ThemeData material,
+  AppTheme(this.displayName, this.name, ThemeData material,
       {this.positiveScoreColor = Colors.green,
       this.negativeScoreColor = Colors.red})
       : super(material: material);
@@ -16,7 +17,7 @@ class AppTheme extends ExtendedTheme {
 
 final appThemes = {
   "hexagon": AppTheme(
-    "Hexagon",
+    "Hexagon", "hexagon",
     ThemeData.dark().copyWith(
       primaryColor: "#012e57".toColor(),
       scaffoldBackgroundColor: "#012e57".toColor(),
@@ -25,7 +26,7 @@ final appThemes = {
     ),
   ),
   "bloodlust": AppTheme(
-    "Bloodlust",
+    "Bloodlust", "bloodlust",
     ThemeData.dark().copyWith(
       primaryColor: "#222".toColor(),
       scaffoldBackgroundColor: "#222".toColor(),
@@ -34,7 +35,7 @@ final appThemes = {
     ),
   ),
   "serpent": AppTheme(
-    "Serpent",
+    "Serpent", "serpent",
     ThemeData.light().copyWith(
       primaryColor: "#dacf6b".toColor(),
       scaffoldBackgroundColor: "#dacf6b".toColor(),
@@ -49,7 +50,7 @@ final appThemes = {
     ),
   ),
   "pony": AppTheme(
-    "Pony",
+    "Pony", "pony",
     ThemeData.dark().copyWith(
       primaryColor: "#2f175c".toColor(),
       scaffoldBackgroundColor: "#2f175c".toColor(),

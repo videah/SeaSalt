@@ -1,5 +1,6 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:seasalt/style.dart';
 
@@ -45,7 +46,12 @@ class ThemeSelectButton extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              ThemeSwitcher.of(context)!.changeTheme(
+              // Write the new theme to storage.
+              var box = Hive.box("settings");
+              box.put("theme", theme?.name);
+
+              // Switch to the new theme in the current session.
+              ThemeSwitcher.of(context)?.changeTheme(
                 theme: theme?.material,
               );
             },
