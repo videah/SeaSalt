@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'package:seasalt/models/post/e6_post.dart';
+import 'package:seasalt/pages/image_viewer_page.dart';
 import 'package:seasalt/widgets/post_image_card.dart';
 import 'package:seasalt/widgets/tag_column.dart';
 
@@ -66,8 +68,22 @@ class PostMobileLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        PostImageCard(post: post),
+        InkWell(
+          child: PostImageCard(post: post),
+          onTap: () {
+            Navigator.of(context).push(
+              PageTransition(
+                type: PageTransitionType.fade,
+                child: ImageViewerPage(post: post),
+              ),
+            );
+          },
+        ),
         PostTileCollection(post: post),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TagColumn(tags: post.tags!, dense: true),
+        )
       ],
     );
   }
@@ -102,9 +118,16 @@ class PostTabletLayout extends StatelessWidget {
                       constraints: BoxConstraints(
                         maxHeight: 690,
                       ),
-                      child: Align(
-                        alignment: Alignment.topCenter,
+                      child: InkWell(
                         child: PostImageCard(post: post),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: ImageViewerPage(post: post),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),

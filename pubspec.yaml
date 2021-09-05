@@ -52,6 +52,8 @@ dev_dependencies:
   flutter_secure_storage: ^5.0.0-beta.5
   url_launcher: ^6.0.10
   responsive_builder: ^0.4.1
+  photo_view: ^0.12.0
+  page_transition: ^2.0.2
 
 # TODO: Get rid of these dependency overrides when possible.
 dependency_overrides:
