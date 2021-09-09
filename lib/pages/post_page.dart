@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 
 import 'package:seasalt/models/post/e6_post.dart';
 import 'package:seasalt/pages/image_viewer_page.dart';
+import 'package:seasalt/widgets/desktop_title_bar.dart';
 import 'package:seasalt/widgets/post_image_card.dart';
 import 'package:seasalt/widgets/tag_column.dart';
 
@@ -15,8 +16,10 @@ class PostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("#${post.id}"),
+      appBar: WindowAppBar(
+        child: AppBar(
+          title: Text("#${post.id}"),
+        ),
       ),
       body: ResponsiveBuilder(
         builder: (context, info) {

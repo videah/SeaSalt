@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seasalt/widgets/desktop_title_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:seasalt/cubits/login_cubit.dart';
@@ -9,8 +10,10 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign In"),
+      appBar: WindowAppBar(
+        child: AppBar(
+          title: Text("Sign In"),
+        ),
       ),
       body: Center(
         child: Padding(

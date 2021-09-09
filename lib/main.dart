@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:seasalt/cubits/login_cubit.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 
+import 'package:seasalt/cubits/login_cubit.dart';
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/network.dart';
 import 'package:seasalt/pages/main_search_page.dart';
@@ -32,6 +33,15 @@ void main() async {
 
   // We're go for lift-off!
   runApp(SeaSalt(themeId: theme));
+
+  doWhenWindowReady(() {
+    const initialSize = Size(600, 450);
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.title = "SeaSalt";
+    appWindow.show();
+  });
 }
 
 Future<void> setupEncryptedBox() async {

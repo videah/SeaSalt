@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seasalt/style.dart';
+import 'package:seasalt/widgets/desktop_title_bar.dart';
 import 'package:seasalt/widgets/theme_select_button.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -10,8 +11,10 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("Settings"),
+        appBar: WindowAppBar(
+          child: AppBar(
+            title: Text("Settings"),
+          ),
         ),
         body: ListView(
           children: [
