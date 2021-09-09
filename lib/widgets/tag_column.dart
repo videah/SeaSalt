@@ -86,15 +86,15 @@ class TagTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "$category",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              category,
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
             Wrap(
               spacing: 8,
               children: [
                 for (var tag in tags)
                   Text(
-                    "$tag",
+                    tag,
                     style: TextStyle(color: color),
                   ),
               ],
@@ -111,12 +111,12 @@ class TagTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "$category",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              category,
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
             for (var tag in tags)
               Text(
-                "$tag",
+                tag,
                 style: TextStyle(color: color),
               ),
           ],

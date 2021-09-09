@@ -45,7 +45,7 @@ void main() async {
 }
 
 Future<void> setupEncryptedBox() async {
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   var containsEncryptionKey = await secureStorage.containsKey(key: "hive-key");
   if (!containsEncryptionKey) {
     var key = Hive.generateSecureKey();
@@ -89,16 +89,16 @@ class SeaSalt extends StatelessWidget {
                           service: PostsService.withClient(client),
                         ),
                       ),
-                      child: MainSearchPage(),
+                      child: const MainSearchPage(),
                     ),
-                "/settings": (context) => SettingsPage(),
+                "/settings": (context) => const SettingsPage(),
                 "/sign-in": (context) => BlocProvider(
                   create: (context) => LoginCubit(
                     repository: LoginRepository(
                       service: PostsService.withClient(client),
                     ),
                   ),
-                  child: SignInPage(),
+                  child: const SignInPage(),
                 ),
               },
             );

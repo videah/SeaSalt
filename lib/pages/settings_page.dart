@@ -7,17 +7,19 @@ import 'package:seasalt/widgets/desktop_title_bar.dart';
 import 'package:seasalt/widgets/theme_select_button.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
         appBar: WindowAppBar(
           child: AppBar(
-            title: Text("Settings"),
+            title: const Text("Settings"),
           ),
         ),
         body: ListView(
-          children: [
+          children: const [
             AccountManagementTile(),
             Divider(),
             ThemeSelectTile(),
@@ -31,6 +33,8 @@ class SettingsPage extends StatelessWidget {
 }
 
 class AccountManagementTile extends StatelessWidget {
+  const AccountManagementTile({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
@@ -38,20 +42,21 @@ class AccountManagementTile extends StatelessWidget {
       builder: (context, secrets, widget) {
         if (!secrets.containsKey("credentials")) {
           return ListTile(
-            title: Text("Sign In"),
+            title: const Text("Sign In"),
             onTap: () async {
-              var success =
-                  await Navigator.of(context).pushNamed("/sign-in");
-              await Future.delayed(Duration(milliseconds: 100));
-              if (success == true) ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.green,
-                  content: ListTile(
-                    title: Text("Successfully signed in."),
-                    leading: Icon(Icons.check, color: Colors.white),
-                  )
-                ),
-              );
+              var success = await Navigator.of(context).pushNamed("/sign-in");
+              await Future.delayed(const Duration(milliseconds: 100));
+              if (success == true) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.green,
+                    content: ListTile(
+                      title: Text("Successfully signed in."),
+                      leading: Icon(Icons.check, color: Colors.white),
+                    ),
+                  ),
+                );
+              }
             },
           );
         } else {
@@ -61,7 +66,7 @@ class AccountManagementTile extends StatelessWidget {
                 title: Text("Signed in as: ${secrets.get("username")}"),
               ),
               ListTile(
-                title: Text("Sign Out"),
+                title: const Text("Sign Out"),
                 onTap: () async {
                   await secrets.delete("credentials");
                 },
@@ -75,12 +80,14 @@ class AccountManagementTile extends StatelessWidget {
 }
 
 class ThemeSelectTile extends StatelessWidget {
+  const ThemeSelectTile({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ListTile(
+        const ListTile(
           title: Text("Theme"),
           leading: Icon(Icons.format_paint_rounded),
         ),
@@ -105,10 +112,12 @@ class ThemeSelectTile extends StatelessWidget {
 }
 
 class CacheManagementTile extends StatelessWidget {
+  const CacheManagementTile({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
+      title: const Text(
         "Clear Image Cache",
         style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
       ),
@@ -117,7 +126,7 @@ class CacheManagementTile extends StatelessWidget {
         try {
           await DefaultCacheManager().emptyCache();
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text(
                 "Successfully cleared image cache.",
                 style: TextStyle(color: Colors.white),
@@ -128,7 +137,7 @@ class CacheManagementTile extends StatelessWidget {
         } catch (e) {
           print("Could not clear image cache: $e");
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text(
                 "Could not clear cache... this could be a bug, please report.",
                 style: TextStyle(color: Colors.white),

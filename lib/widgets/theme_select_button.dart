@@ -31,7 +31,7 @@ class ThemeSelectButton extends StatelessWidget {
           child: TextButton(
             style: TextButton.styleFrom(
               backgroundColor: theme?.material?.primaryColor,
-              shape: CircleBorder(
+              shape: const CircleBorder(
                 side: BorderSide(
                   color: Colors.white,
                   width: 4,

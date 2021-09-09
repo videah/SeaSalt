@@ -48,7 +48,7 @@ class PostTileCollection extends StatelessWidget {
             child: ExpansionTile(
               expandedAlignment: Alignment.topLeft,
               initiallyExpanded: true,
-              title: Text("Description"),
+              title: const Text("Description"),
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -104,7 +104,7 @@ class PostTabletLayout extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: 250,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -118,7 +118,7 @@ class PostTabletLayout extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: Theme.of(context).cardColor,
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxHeight: 690,
                       ),
                       child: InkWell(

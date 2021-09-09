@@ -13,7 +13,7 @@ class WindowAppBar extends StatelessWidget with PreferredSizeWidget {
     if (Platform.isWindows) {
       return Column(
         children: [
-          WindowTitleBar(),
+          const WindowTitleBar(),
           child,
         ],
       );
@@ -36,6 +36,8 @@ class WindowAppBar extends StatelessWidget with PreferredSizeWidget {
 }
 
 class WindowTitleBar extends StatelessWidget {
+  const WindowTitleBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,15 +51,15 @@ class WindowTitleBar extends StatelessWidget {
                 Expanded(
                   child: Stack(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text("SeaSalt"),
                       ),
                       MoveWindow(),
                     ],
                   ),
                 ),
-                WindowButtons(),
+                const WindowButtons(),
               ],
             ),
           ),
@@ -68,6 +70,8 @@ class WindowTitleBar extends StatelessWidget {
 }
 
 class WindowButtons extends StatelessWidget {
+  const WindowButtons({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final brightness = ThemeData.estimateBrightnessForColor(

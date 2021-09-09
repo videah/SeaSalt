@@ -145,7 +145,7 @@ class PostDescriptor extends StatelessWidget {
             ScoreIndicator(score: score),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.favorite,
                   size: 14.0,
                 ),

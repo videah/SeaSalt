@@ -70,10 +70,10 @@ final appThemes = {
       scaffoldBackgroundColor: "#dacf6b".toColor(),
       canvasColor: "#dacf6b".toColor(),
       cardColor: "#fff6a5".toColor(),
-      primaryIconTheme: IconThemeData(
+      primaryIconTheme: const IconThemeData(
         color: Colors.black,
       ),
-      primaryTextTheme: TextTheme(
+      primaryTextTheme: const TextTheme(
         headline6: TextStyle(color: Colors.black),
       ),
     ),

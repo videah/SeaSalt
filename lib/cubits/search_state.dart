@@ -11,7 +11,7 @@ abstract class SearchState {
   /// A list of posts pulled from e621/e926.
   final List<E6Post> posts;
 
-  SearchState({required this.tags, required this.posts});
+  const SearchState({required this.tags, required this.posts});
 }
 
 /// The default empty state when using [SearchCubit].
@@ -25,20 +25,23 @@ class SearchInitial extends SearchState {
 /// The state when [SearchCubit] is currently loading data.
 class SearchLoading extends SearchState {
   /// A string of post tags used to search for posts.
+  @override
   final String tags;
 
   /// A list of posts pulled from e621/e926.
   ///
   /// This will either be empty or contain posts from a previous search.
+  @override
   final List<E6Post> posts;
 
-  SearchLoading({required this.tags, required this.posts})
+  const SearchLoading({required this.tags, required this.posts})
       : super(tags: tags, posts: posts);
 }
 
 /// The state when [SearchCubit] has failed to load posts for whatever reason.
 class SearchError extends SearchState {
   /// A string of post tags used to search for posts.
+  @override
   final String tags;
 
   /// An error message from a failed search.
@@ -51,11 +54,13 @@ class SearchError extends SearchState {
 /// The state when [SearchCubit] has successfully loaded posts from the API.
 class SearchResult extends SearchState {
   /// A string of post tags used to search for posts.
+  @override
   final String tags;
 
   /// A list of posts pulled from e621/e926.
+  @override
   final List<E6Post> posts;
 
-  SearchResult({required this.tags, required this.posts})
+  const SearchResult({required this.tags, required this.posts})
       : super(tags: tags, posts: posts);
 }

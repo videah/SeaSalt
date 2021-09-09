@@ -35,7 +35,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.1"
+    version: "2.8.1"
   backfit:
     dependency: "direct main"
     description:
@@ -51,7 +51,7 @@ packages:
     source: hosted
     version: "0.0.2"
   bitsdojo_window:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: bitsdojo_window
       url: "https://pub.dartlang.org"
@@ -133,7 +133,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   build_runner_core:
     dependency: transitive
     description:
@@ -147,7 +147,7 @@ packages:
       name: built_collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.0"
+    version: "5.1.1"
   built_value:
     dependency: transitive
     description:
@@ -189,7 +189,7 @@ packages:
       name: charcode
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.3.1"
   checked_yaml:
     dependency: transitive
     description:
@@ -252,7 +252,7 @@ packages:
       name: dart_style
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.1.0"
   extended_theme:
     dependency: "direct main"
     description:
@@ -321,8 +321,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  flutter_secure_storage:
+  flutter_lints:
     dependency: "direct dev"
+    description:
+      name: flutter_lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
+  flutter_secure_storage:
+    dependency: "direct main"
     description:
       name: flutter_secure_storage
       url: "https://pub.dartlang.org"
@@ -456,7 +463,7 @@ packages:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "4.1.0"
   json_serializable:
     dependency: "direct main"
     description:
@@ -464,6 +471,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.4"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   logging:
     dependency: transitive
     description:
@@ -498,7 +512,7 @@ packages:
       name: model_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.1"
+    version: "5.2.0"
   nested:
     dependency: transitive
     description:
@@ -521,7 +535,7 @@ packages:
     source: hosted
     version: "2.0.0"
   page_transition:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: page_transition
       url: "https://pub.dartlang.org"
@@ -540,7 +554,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   path_provider_linux:
     dependency: transitive
     description:
@@ -577,7 +591,7 @@ packages:
     source: hosted
     version: "1.11.1"
   photo_view:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: photo_view
       url: "https://pub.dartlang.org"
@@ -633,7 +647,7 @@ packages:
     source: hosted
     version: "1.0.0"
   responsive_builder:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: responsive_builder
       url: "https://pub.dartlang.org"
@@ -645,7 +659,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.27.1"
+    version: "0.27.2"
   shelf:
     dependency: transitive
     description:
@@ -699,7 +713,7 @@ packages:
       name: sqflite_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.1+1"
   stack_trace:
     dependency: transitive
     description:
@@ -762,7 +776,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.4.2"
   timing:
     dependency: transitive
     description:
@@ -778,7 +792,7 @@ packages:
     source: hosted
     version: "1.3.0"
   url_launcher:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: url_launcher
       url: "https://pub.dartlang.org"
@@ -853,7 +867,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.8"
+    version: "2.2.9"
   xdg_directories:
     dependency: transitive
     description:

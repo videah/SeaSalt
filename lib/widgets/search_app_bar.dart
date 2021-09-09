@@ -8,7 +8,7 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  SearchAppBar({Key? key}) : preferredSize = Size.fromHeight(56);
+  SearchAppBar({Key? key}) : preferredSize = const Size.fromHeight(56), super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
         AppBar(
           actions: [
             IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               tooltip: "Settings",
               onPressed: () {
                 Navigator.of(context).pushNamed("/settings");
@@ -25,14 +25,16 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
             ),
           ],
         ),
-        SearchInputBox(),
-        SearchLoader(),
+        const SearchInputBox(),
+        const SearchLoader(),
       ],
     );
   }
 }
 
 class SearchInputBox extends StatelessWidget {
+  const SearchInputBox({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,7 +52,7 @@ class SearchInputBox extends StatelessWidget {
             contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
             border: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(4),
-              borderSide: BorderSide(width: 0, style: BorderStyle.none),
+              borderSide: const BorderSide(width: 0, style: BorderStyle.none),
             ),
           ),
         ),
@@ -60,13 +62,15 @@ class SearchInputBox extends StatelessWidget {
 }
 
 class SearchLoader extends StatelessWidget {
+  const SearchLoader({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         // No results yet, show loading indicator.
-        if (!(state is SearchResult)) {
-          return SafeArea(
+        if (state is! SearchResult) {
+          return const SafeArea(
             child: Align(
               alignment: Alignment.bottomCenter,
               child: LinearProgressIndicator(
