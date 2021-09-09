@@ -91,7 +91,9 @@ class SeaSalt extends StatelessWidget {
                       ),
                       child: const MainSearchPage(),
                     ),
-                "/settings": (context) => const SettingsPage(),
+                // Do not make const, breaks theme switch animation causing
+                // a crash.
+                "/settings": (context) => SettingsPage(),
                 "/sign-in": (context) => BlocProvider(
                   create: (context) => LoginCubit(
                     repository: LoginRepository(
