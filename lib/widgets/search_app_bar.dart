@@ -8,7 +8,9 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  SearchAppBar({Key? key}) : preferredSize = const Size.fromHeight(56), super(key: key);
+  SearchAppBar({Key? key})
+      : preferredSize = const Size.fromHeight(56),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +42,16 @@ class SearchInputBox extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(
-            top: 8.0, left: 6.0, bottom: 8.0, right: 50.0),
+          top: 8.0,
+          left: 6.0,
+          bottom: 8.0,
+          right: 50.0,
+        ),
         child: TextField(
           onSubmitted: (tags) {
             context.read<SearchCubit>().search(tags);
           },
+          textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             isDense: true,
             filled: true,
