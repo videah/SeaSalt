@@ -26,6 +26,7 @@ linter:
    # This is apparently bad practice but we have to do this till metaprogramming in dart is a thing.
    overridden_fields: false
    constant_identifier_names: false
+   prefer_const_constructors: false
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

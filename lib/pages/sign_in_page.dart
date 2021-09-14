@@ -90,7 +90,7 @@ class SignInCard extends StatelessWidget {
                   IconButton(
                     tooltip: "Generate API Key",
                     icon: const Icon(Icons.get_app),
-                    onPressed: () => launch("https://e926.net/users/0/api_key"),
+                    onPressed: () => launch("https://e621.net/users/0/api_key"),
                   ),
                 ],
               ),

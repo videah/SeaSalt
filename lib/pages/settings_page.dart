@@ -24,6 +24,8 @@ class SettingsPage extends StatelessWidget {
             Divider(),
             ThemeSelectTile(),
             Divider(),
+            NSFWTile(),
+            Divider(),
             CacheManagementTile(),
           ],
         ),
@@ -146,6 +148,49 @@ class CacheManagementTile extends StatelessWidget {
             ),
           );
         }
+      },
+    );
+  }
+}
+
+class NSFWTile extends StatelessWidget {
+  const NSFWTile({Key? key}) : super(key: key);
+
+  void _setValue(bool? value) => Hive.box("settings").put("show_nsfw", value);
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<Box>(
+      valueListenable: Hive.box("secrets").listenable(),
+      builder: (context, secrets, widget) {
+        return ValueListenableBuilder<Box>(
+          valueListenable: Hive.box("settings").listenable(),
+          builder: (context, settings, widget) {
+            bool signedIn = secrets.containsKey("credentials");
+            return CheckboxListTile(
+              title: Text("Show NSFW Posts"),
+              subtitle: Text("Must have an e621 account."),
+              value: !signedIn ? false : settings.get("show_nsfw") ?? false,
+              onChanged: signedIn ? _setValue : null,
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class RequireSignIn extends StatelessWidget {
+  final Widget child;
+
+  const RequireSignIn({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<Box>(
+      valueListenable: Hive.box("secrets").listenable(),
+      builder: (context, secrets, widget) {
+        return secrets.containsKey("credentials") == true ? child : Container();
       },
     );
   }

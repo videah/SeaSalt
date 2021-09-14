@@ -1,9 +1,13 @@
 import 'package:backfit/backfit.dart';
 import 'package:hive/hive.dart';
 
-final client = BackfitClient(
+var client = BackfitClient(
   baseUrl: "https://e621.net",
-  interceptors: [UserAgentInterceptor(), BasicAuthInterceptor()],
+  interceptors: [
+    UserAgentInterceptor(),
+    BasicAuthInterceptor(),
+    NsfwInterceptor(),
+  ],
 );
 
 /// An interceptor for [BackfitClient] to add a User-Agent header, which e621
@@ -21,8 +25,8 @@ class UserAgentInterceptor extends RequestInterceptor {
 class BasicAuthInterceptor extends RequestInterceptor {
   @override
   BaseRequest? onInterceptRequest(BaseRequest request) {
+    print(request.url.host);
     var secrets = Hive.box("secrets");
-
     // Make sure the secrets box is open first before we do anything crazy.
     if (!secrets.isOpen) return request;
 
@@ -39,5 +43,25 @@ class BasicAuthInterceptor extends RequestInterceptor {
     print("Request is not authenticated");
 
     return request;
+  }
+}
+
+class NsfwInterceptor extends RequestInterceptor {
+  BaseRequest onlySFW(BaseRequest request) {
+    print("Only showing SFW stuff from e926.");
+    var url = request.url.replace(host: "e926.net");
+    return Request(request.method, url);
+  }
+
+  @override
+  BaseRequest? onInterceptRequest(BaseRequest request) {
+    var secrets = Hive.box("secrets");
+    var settings = Hive.box("settings");
+    var signedIn = secrets.containsKey("credentials");
+    var nsfwEnabled = settings.get("show_nsfw", defaultValue: false);
+
+    if (!secrets.isOpen || !settings.isOpen) return onlySFW(request);
+
+    return (signedIn && nsfwEnabled) ? request : onlySFW(request);
   }
 }
