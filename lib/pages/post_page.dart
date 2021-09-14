@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:seasalt/models/post/e6_post.dart';
 import 'package:seasalt/pages/image_viewer_page.dart';
 import 'package:seasalt/widgets/desktop_title_bar.dart';
 import 'package:seasalt/widgets/post_image_card.dart';
 import 'package:seasalt/widgets/tag_column.dart';
+
+enum PostAction { report }
 
 class PostPage extends StatelessWidget {
   final E6Post post;
@@ -19,6 +23,26 @@ class PostPage extends StatelessWidget {
       appBar: WindowAppBar(
         child: AppBar(
           title: Text("#${post.id}"),
+          actions: [
+            IconButton(
+              tooltip: "Share",
+              icon: Icon(Icons.share),
+              onPressed: () => Share.share("${post.file?.url}"),
+            ),
+            PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem<PostAction>(
+                  value: PostAction.report,
+                  child: Text("Report Post"),
+                ),
+              ],
+              onSelected: (PostAction action) {
+                if (action == PostAction.report) {
+                  launch("https://e621.net/tickets/new?disp_id=${post.id}&type=post");
+                }
+              },
+            )
+          ],
         ),
       ),
       body: ResponsiveBuilder(
