@@ -9,6 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 import 'package:seasalt/cubits/login_cubit.dart';
+import 'package:seasalt/cubits/search_bar_cubit.dart';
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/network.dart';
 import 'package:seasalt/pages/main_search_page.dart';
@@ -83,25 +84,32 @@ class SeaSalt extends StatelessWidget {
               title: "SeaSalt",
               theme: theme,
               routes: {
-                "/": (context) => BlocProvider(
-                      create: (context) => SearchCubit(
-                        repository: SearchRepository(
-                          service: PostsService.withClient(client),
+                "/": (context) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider<SearchCubit>(
+                          create: (context) => SearchCubit(
+                            repository: SearchRepository(
+                              service: PostsService.withClient(client),
+                            ),
+                          ),
                         ),
-                      ),
+                        BlocProvider<SearchBarCubit>(
+                          create: (context) => SearchBarCubit(),
+                        ),
+                      ],
                       child: const MainSearchPage(),
                     ),
                 // Do not make const, breaks theme switch animation causing
                 // a crash.
                 "/settings": (context) => SettingsPage(),
                 "/sign-in": (context) => BlocProvider(
-                  create: (context) => LoginCubit(
-                    repository: LoginRepository(
-                      service: PostsService.withClient(client),
+                      create: (context) => LoginCubit(
+                        repository: LoginRepository(
+                          service: PostsService.withClient(client),
+                        ),
+                      ),
+                      child: const SignInPage(),
                     ),
-                  ),
-                  child: const SignInPage(),
-                ),
               },
             );
           },

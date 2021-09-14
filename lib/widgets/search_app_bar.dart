@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seasalt/cubits/search_bar_cubit.dart';
+import 'package:seasalt/cubits/search_bar_state.dart';
 
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/cubits/search_state.dart';
@@ -16,20 +18,38 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AppBar(
-          actions: [
-            IconButton(
+        AppBar(),
+        SettingsButton(),
+        const SearchInputBox(),
+        const SearchLoader(),
+      ],
+    );
+  }
+}
+
+class SettingsButton extends StatelessWidget {
+  const SettingsButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SearchBarCubit, SearchBarState>(
+      builder: (context, state) {
+        return AnimatedPositioned(
+          duration: state.duration,
+          curve: state.curve,
+          right: (state is SearchBarUnfocused) ? 5 : -36,
+          top: 7,
+          child: SafeArea(
+            child: IconButton(
               icon: const Icon(Icons.settings),
               tooltip: "Settings",
               onPressed: () {
                 Navigator.of(context).pushNamed("/settings");
               },
             ),
-          ],
-        ),
-        const SearchInputBox(),
-        const SearchLoader(),
-      ],
+          ),
+        );
+      },
     );
   }
 }
@@ -40,30 +60,46 @@ class SearchInputBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 8.0,
-          left: 6.0,
-          bottom: 8.0,
-          right: 50.0,
-        ),
-        child: TextField(
-          onSubmitted: (tags) {
-            context.read<SearchCubit>().search(tags);
-          },
-          textInputAction: TextInputAction.search,
-          decoration: InputDecoration(
-            isDense: true,
-            filled: true,
-            hintText: "Search...",
-            contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-            border: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(4),
-              borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+      child: BlocBuilder<SearchBarCubit, SearchBarState>(
+        builder: (context, state) {
+          final isFocused = (state is SearchBarFocused);
+          return AnimatedPadding(
+            duration: state.duration,
+            curve: state.curve,
+            padding: EdgeInsets.only(
+              top: 8.0,
+              left: 6.0,
+              bottom: 8.0,
+              right: isFocused ? 6.0 : 50.0,
             ),
-          ),
-        ),
-      ),
+            child: FocusScope(
+              onFocusChange: (focused) {
+                if (focused) {
+                  context.read<SearchBarCubit>().focus();
+                } else {
+                context.read<SearchBarCubit>().unfocus();
+                }
+              },
+              child: TextField(
+                onSubmitted: (tags) {
+                  context.read<SearchCubit>().search(tags);
+                },
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  isDense: true,
+                  filled: true,
+                  hintText: "Search...",
+                  contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  border: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      )
     );
   }
 }
