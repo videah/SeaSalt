@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:seasalt/cubits/autocomplete_cubit.dart';
 import 'package:seasalt/cubits/autocomplete_state.dart';
@@ -14,19 +15,39 @@ class AutocompleteList extends StatelessWidget {
       builder: (context, state) {
         if (state is AutocompleteSuccess) {
           return FadeIn(
-            child: ListView.builder(
-              itemCount: state.tags.length,
-              itemBuilder: (context, i) {
-                final tag = state.tags[i];
-                return Material(
-                  color: Theme.of(context).primaryColor,
-                  child: ListTile(
-                    title: Text(tag.name ?? "unknown"),
-                    trailing: Text("${tag.postCount}"),
-                    onTap: () {},
+            child: ResponsiveBuilder(
+              builder: (context, info) {
+                return Container(
+                  constraints: BoxConstraints(
+                    maxWidth: (info.isDesktop || info.isTablet) ? 600 : double.infinity,
+                  ),
+                  child: ListView.builder(
+                    itemCount: state.tags.length,
+                    itemBuilder: (context, i) {
+                      final tag = state.tags[i];
+                      return Material(
+                        color: Theme.of(context).primaryColor,
+                        child: ListTile(
+                          title: Row(
+                            children: [
+                              Text(tag.name ?? "unknown"),
+                              if (tag.antecedentName != null) ...[
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Icon(Icons.arrow_forward, size: 14,),
+                                ),
+                                Text(tag.antecedentName!),
+                              ]
+                            ],
+                          ),
+                          trailing: Text("${tag.postCount}"),
+                          onTap: () {},
+                        ),
+                      );
+                    },
                   ),
                 );
-              },
+              }
             ),
           );
         } else {
