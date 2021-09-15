@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:seasalt/cubits/autocomplete_cubit.dart';
+
 import 'package:seasalt/cubits/search_bar_cubit.dart';
 import 'package:seasalt/cubits/search_bar_state.dart';
-
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/cubits/search_state.dart';
 
@@ -18,7 +20,9 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AppBar(),
+        AppBar(
+          backwardsCompatibility: true,
+        ),
         SettingsButton(),
         const SearchInputBox(),
         const SearchLoader(),
@@ -59,51 +63,66 @@ class SearchInputBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocBuilder<SearchBarCubit, SearchBarState>(
-        builder: (context, state) {
-          final isFocused = (state is SearchBarFocused);
-          return AnimatedPadding(
-            duration: state.duration,
-            curve: state.curve,
-            padding: EdgeInsets.only(
-              top: 8.0,
-              left: 6.0,
-              bottom: 8.0,
-              right: isFocused ? 6.0 : 50.0,
-            ),
-            child: FocusScope(
-              onFocusChange: (focused) {
-                if (focused) {
-                  context.read<SearchBarCubit>().focus();
-                } else {
+    return SafeArea(child: BlocBuilder<SearchBarCubit, SearchBarState>(
+      builder: (context, state) {
+        final isFocused = (state is SearchBarFocused);
+        return AnimatedPadding(
+          duration: state.duration,
+          curve: state.curve,
+          padding: EdgeInsets.only(
+            top: 8.0,
+            left: 6.0,
+            bottom: 8.0,
+            right: isFocused ? 6.0 : 50.0,
+          ),
+          child: FocusScope(
+            onFocusChange: (focused) {
+              if (focused) {
+                context.read<SearchBarCubit>().focus();
+              } else {
                 context.read<SearchBarCubit>().unfocus();
+              }
+            },
+            child: TextField(
+              onSubmitted: (tags) {
+                context.read<SearchCubit>().search(tags);
+              },
+              onEditingComplete: () {
+                context.read<SearchBarCubit>().unfocus();
+              },
+              onChanged: (value) {
+                if (value.length < 3) {
+                  EasyDebounce.cancel("autocomplete-debounce");
+                  context.read<AutocompleteCubit>().clear();
+                } else {
+                  EasyDebounce.debounce(
+                    "autocomplete-debounce",
+                    Duration(milliseconds: 200),
+                    () {
+                      context.read<AutocompleteCubit>().getTags(value);
+                    },
+                  );
                 }
               },
-              child: TextField(
-                onSubmitted: (tags) {
-                  context.read<SearchCubit>().search(tags);
-                },
-                onEditingComplete: () {
-                  context.read<SearchBarCubit>().unfocus();
-                },
-                textInputAction: TextInputAction.search,
-                decoration: InputDecoration(
-                  isDense: true,
-                  filled: true,
-                  hintText: "Search...",
-                  contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  border: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+              textInputAction: TextInputAction.search,
+              decoration: InputDecoration(
+                isDense: true,
+                filled: true,
+                hintText: "Search...",
+                contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                border: UnderlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: const BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
                   ),
                 ),
               ),
             ),
-          );
-        },
-      )
-    );
+          ),
+        );
+      },
+    ));
   }
 }
 

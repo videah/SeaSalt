@@ -7,6 +7,7 @@ import 'package:seasalt/cubits/search_bar_cubit.dart';
 import 'package:seasalt/cubits/search_bar_state.dart';
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/cubits/search_state.dart';
+import 'package:seasalt/widgets/autocomplete_list.dart';
 import 'package:seasalt/widgets/desktop_title_bar.dart';
 
 import 'package:seasalt/widgets/image_tile.dart';
@@ -53,14 +54,19 @@ class MainSearchPage extends StatelessWidget {
                     onTap: () {
                       context.read<SearchBarCubit>().unfocus();
                     },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      color: isFocused ? Colors.black.withAlpha(180) : Colors.transparent,
+                    child: Stack(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 200),
+                          color: isFocused ? Colors.black.withAlpha(180) : Colors.transparent,
+                        ),
+                        if (isFocused) AutocompleteList(),
+                      ],
                     ),
                   ),
                 );
               },
-            )
+            ),
           ],
         ),
       ),

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:seasalt/cubits/autocomplete_cubit.dart';
 
 import 'package:seasalt/cubits/login_cubit.dart';
 import 'package:seasalt/cubits/search_bar_cubit.dart';
@@ -15,9 +16,11 @@ import 'package:seasalt/network.dart';
 import 'package:seasalt/pages/main_search_page.dart';
 import 'package:seasalt/pages/settings_page.dart';
 import 'package:seasalt/pages/sign_in_page.dart';
+import 'package:seasalt/repositories/autocomplete_repository.dart';
 import 'package:seasalt/repositories/login_repository.dart';
 import 'package:seasalt/repositories/search_repository.dart';
 import 'package:seasalt/services/posts_service.dart';
+import 'package:seasalt/services/autocomplete_service.dart';
 import 'package:seasalt/style.dart';
 
 void main() async {
@@ -90,6 +93,13 @@ class SeaSalt extends StatelessWidget {
                           create: (context) => SearchCubit(
                             repository: SearchRepository(
                               service: PostsService.withClient(client),
+                            ),
+                          ),
+                        ),
+                        BlocProvider<AutocompleteCubit>(
+                          create: (context) => AutocompleteCubit(
+                            repository: AutocompleteRepository(
+                              service: AutocompleteService.withClient(client),
                             ),
                           ),
                         ),
