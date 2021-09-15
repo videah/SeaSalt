@@ -84,6 +84,9 @@ class SearchInputBox extends StatelessWidget {
                 onSubmitted: (tags) {
                   context.read<SearchCubit>().search(tags);
                 },
+                onEditingComplete: () {
+                  context.read<SearchBarCubit>().unfocus();
+                },
                 textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
                   isDense: true,
