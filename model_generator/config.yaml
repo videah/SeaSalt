@@ -228,3 +228,17 @@ PostResponse:
       type: array
       items:
         type: E6Post
+
+AutocompleteTag:
+  path: autocomplete
+  properties:
+    id:
+      type: int
+    name:
+      type: string
+    post_count:
+      type: int
+    category:
+      type: int
+    antecedent_name:
+      type: string
