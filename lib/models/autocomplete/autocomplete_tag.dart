@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:seasalt/models/autocomplete/autocomplete_category.dart';
 
 part 'autocomplete_tag.g.dart';
 
@@ -11,7 +12,7 @@ class AutocompleteTag {
   @JsonKey(name: 'post_count', includeIfNull: false)
   final int? postCount;
   @JsonKey(name: 'category', includeIfNull: false)
-  final int? category;
+  final AutocompleteCategory? category;
   @JsonKey(name: 'antecedent_name', includeIfNull: false)
   final String? antecedentName;
 

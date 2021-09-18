@@ -239,6 +239,35 @@ AutocompleteTag:
     post_count:
       type: int
     category:
-      type: int
+      type: AutocompleteCategory
     antecedent_name:
       type: string
+
+AutocompleteCategory:
+  path: autocomplete
+  type: custom
+
+# Currently the model generator doesn't support enums with int values... go figure
+#AutocompleteCategory:
+#  path: autocomplete
+#  type: enum
+#  generate_map: true
+#  generate_extensions: true
+#  properties:
+#    GENERAL:
+#      value: 0
+#    ARTIST:
+#      value: 1
+#    # For some reason e621 seem skip the number 2 for the category ID here... not sure why lol
+#    COPYRIGHT:
+#      value: 3
+#    CHARACTERS:
+#      value: 4
+#    SPECIES:
+#      value: 5
+#    INVALID:
+#      value: 6
+#    META:
+#      value: 7
+#    LORE:
+#      value: 8

@@ -99,7 +99,7 @@ class SearchInputBox extends StatelessWidget {
                 } else {
                   EasyDebounce.debounce(
                     "autocomplete-debounce",
-                    Duration(milliseconds: 100),
+                    Duration(milliseconds: 200),
                     () {
                       context.read<AutocompleteCubit>().getTags(words.last);
                     },

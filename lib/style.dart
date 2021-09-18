@@ -1,8 +1,9 @@
+import 'package:seasalt/models/autocomplete/autocomplete_category.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:extended_theme/extended_theme.dart';
 import 'package:flutter/material.dart';
 
-/// A data class to define themes in an easily switchable and composable way.
+/// A class to define themes in an easily switchable and composable way.
 class AppTheme extends ExtendedTheme {
   final String name;
   final String displayName;
@@ -17,6 +18,30 @@ class AppTheme extends ExtendedTheme {
   final Color? generalTagColor;
   final Color? metaTagColor;
   final Color? loreTagColor;
+  final Color? invalidTagColor;
+
+  Color? getAutocompleteColor(AutocompleteCategory? category) {
+    switch (category) {
+      case AutocompleteCategory.GENERAL:
+        return generalTagColor;
+      case AutocompleteCategory.ARTIST:
+        return artistTagColor;
+      case AutocompleteCategory.COPYRIGHT:
+        return copyrightTagColor;
+      case AutocompleteCategory.CHARACTERS:
+        return characterTagColor;
+      case AutocompleteCategory.SPECIES:
+        return speciesTagColor;
+      case AutocompleteCategory.INVALID:
+        return invalidTagColor;
+      case AutocompleteCategory.META:
+        return metaTagColor;
+      case AutocompleteCategory.LORE:
+        return loreTagColor;
+      case null:
+        return Colors.white;
+    }
+  }
 
   AppTheme(
     this.displayName,
@@ -29,6 +54,7 @@ class AppTheme extends ExtendedTheme {
     this.generalTagColor,
     this.metaTagColor,
     this.loreTagColor,
+    this.invalidTagColor,
     this.positiveScoreColor = Colors.green,
     this.negativeScoreColor = Colors.red,
   }) : super(material: material);
@@ -51,6 +77,7 @@ final appThemes = {
     generalTagColor: "#b4c7d9".toColor(),
     metaTagColor: Colors.white,
     loreTagColor: "#282".toColor(),
+    invalidTagColor: Colors.red,
   ),
   "bloodlust": AppTheme(
     "Bloodlust",
