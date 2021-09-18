@@ -91,15 +91,17 @@ class SearchInputBox extends StatelessWidget {
                 context.read<SearchBarCubit>().unfocus();
               },
               onChanged: (value) {
-                if (value.length < 3) {
+                // We just want to do autocomplete on the last word.
+                final words = value.split(" ");
+                if (words.last.length < 3) {
                   EasyDebounce.cancel("autocomplete-debounce");
                   context.read<AutocompleteCubit>().clear();
                 } else {
                   EasyDebounce.debounce(
                     "autocomplete-debounce",
-                    Duration(milliseconds: 200),
+                    Duration(milliseconds: 100),
                     () {
-                      context.read<AutocompleteCubit>().getTags(value);
+                      context.read<AutocompleteCubit>().getTags(words.last);
                     },
                   );
                 }

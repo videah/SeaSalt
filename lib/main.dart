@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 
 import 'package:extended_theme/extended_theme.dart';
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
@@ -38,14 +39,17 @@ void main() async {
   // We're go for lift-off!
   runApp(SeaSalt(themeId: theme));
 
-  doWhenWindowReady(() {
-    const initialSize = Size(600, 450);
-    appWindow.minSize = initialSize;
-    appWindow.size = initialSize;
-    appWindow.alignment = Alignment.center;
-    appWindow.title = "SeaSalt";
-    appWindow.show();
-  });
+  // We spawn a window on desktop with a custom title bar.
+  if (!Platform.isAndroid && !Platform.isIOS) {
+    doWhenWindowReady(() {
+      const initialSize = Size(600, 450);
+      appWindow.minSize = initialSize;
+      appWindow.size = initialSize;
+      appWindow.alignment = Alignment.center;
+      appWindow.title = "SeaSalt";
+      appWindow.show();
+    });
+  }
 }
 
 Future<void> setupEncryptedBox() async {
