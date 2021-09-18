@@ -48,22 +48,22 @@ class MainSearchPage extends StatelessWidget {
             BlocBuilder<SearchBarCubit, SearchBarState>(
               builder: (context, state) {
                 final isFocused = (state is SearchBarFocused);
-                return IgnorePointer(
-                  ignoring: !isFocused,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.read<SearchBarCubit>().unfocus();
-                    },
-                    child: Stack(
-                      children: [
-                        AnimatedContainer(
+                return Stack(
+                  children: [
+                    IgnorePointer(
+                      ignoring: !isFocused,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<SearchBarCubit>().unfocus();
+                        },
+                        child: AnimatedContainer(
                           duration: Duration(milliseconds: 200),
                           color: isFocused ? Colors.black.withAlpha(180) : Colors.transparent,
                         ),
-                        if (isFocused) AutocompleteList(),
-                      ],
+                      ),
                     ),
-                  ),
+                    if (isFocused) AutocompleteList(),
+                  ],
                 );
               },
             ),

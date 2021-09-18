@@ -1,8 +1,11 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart' as desktop;
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
 import 'package:seasalt/models/post/e6_post.dart';
 import 'package:seasalt/pages/image_viewer_page.dart';
@@ -37,9 +40,21 @@ class PostPage extends StatelessWidget {
                   child: Text("Report Post"),
                 ),
               ],
-              onSelected: (PostAction action) {
+              onSelected: (PostAction action) async {
                 if (action == PostAction.report) {
-                  launch("https://e621.net/tickets/new?disp_id=${post.id}&type=post");
+                  if (Platform.isIOS || Platform.isAndroid) {
+                    await launch(
+                      "https://e621.net/tickets/new?disp_id=${post.id}&type=post",
+                      customTabsOption: CustomTabsOption(
+                        toolbarColor: Theme.of(context).primaryColor,
+                        enableDefaultShare: false,
+                      ),
+                    );
+                  } else {
+                    desktop.launch(
+                      "https://e621.net/tickets/new?disp_id=${post.id}&type=post",
+                    );
+                  }
                 }
               },
             )
