@@ -40,7 +40,7 @@ void main() async {
   runApp(SeaSalt(themeId: theme));
 
   // We spawn a window on desktop with a custom title bar.
-  if (!Platform.isAndroid && !Platform.isIOS) {
+  if (Platform.isWindows) {
     doWhenWindowReady(() {
       const initialSize = Size(600, 450);
       appWindow.minSize = initialSize;
@@ -55,7 +55,12 @@ void main() async {
 Future<void> setupEncryptedBox() async {
   const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   var containsEncryptionKey = await secureStorage.containsKey(key: "hive-key");
-  if (!containsEncryptionKey) {
+  // We have to do this for now because there is a bug where containsKey
+  // will always return true on macOS. Sad!
+  var backupCheck = await secureStorage.read(key: "hive-key");
+
+  if (!containsEncryptionKey || (backupCheck == null)) {
+    print("No encrypted box found, creating...");
     var key = Hive.generateSecureKey();
     await secureStorage.write(key: "hive-key", value: base64UrlEncode(key));
   }
