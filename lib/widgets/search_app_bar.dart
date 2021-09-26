@@ -123,9 +123,11 @@ class SearchInputBox extends StatelessWidget {
             child: TextField(
               controller: _controller,
               onSubmitted: (tags) {
+                FocusScope.of(context).unfocus();
                 context.read<SearchCubit>().search(tags);
               },
               onEditingComplete: () {
+                FocusScope.of(context).unfocus();
                 context.read<SearchBarCubit>().unfocus();
               },
               onChanged: (value) {
