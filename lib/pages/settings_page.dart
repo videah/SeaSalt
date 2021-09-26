@@ -20,12 +20,20 @@ class SettingsPage extends StatelessWidget {
           ),
         ),
         body: ListView(
-          children: const [
+          children: [
             AccountManagementTile(),
             Divider(),
             ThemeSelectTile(),
             Divider(),
             NSFWTile(),
+            Divider(),
+            ListTile(
+              title: Text("About SeaSalt"),
+              leading: Icon(Icons.info),
+              onTap: () {
+                Navigator.of(context).pushNamed("/about");
+              },
+            ),
             Divider(),
             CacheManagementTile(),
           ],

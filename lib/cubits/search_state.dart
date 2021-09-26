@@ -47,8 +47,8 @@ class SearchError extends SearchState {
   /// An error message from a failed search.
   final String error;
 
-  SearchError({required this.tags, required this.error})
-      : super(tags: tags, posts: []);
+  const SearchError({required this.tags, required this.error})
+      : super(tags: tags, posts: const []);
 }
 
 /// The state when [SearchCubit] has successfully loaded posts from the API.

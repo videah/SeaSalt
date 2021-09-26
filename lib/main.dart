@@ -14,6 +14,7 @@ import 'package:seasalt/cubits/login_cubit.dart';
 import 'package:seasalt/cubits/search_bar_cubit.dart';
 import 'package:seasalt/cubits/search_cubit.dart';
 import 'package:seasalt/network.dart';
+import 'package:seasalt/pages/about_page.dart';
 import 'package:seasalt/pages/main_search_page.dart';
 import 'package:seasalt/pages/settings_page.dart';
 import 'package:seasalt/pages/sign_in_page.dart';
@@ -129,6 +130,7 @@ class SeaSalt extends StatelessWidget {
                       ),
                       child: const SignInPage(),
                     ),
+                "/about": (context) => AboutPage(),
               },
             );
           },
