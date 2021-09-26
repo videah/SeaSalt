@@ -24,7 +24,7 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
           backwardsCompatibility: true,
         ),
         SettingsButton(),
-        const SearchInputBox(),
+        SearchInputBox(),
         const SearchLoader(),
       ],
     );
@@ -59,7 +59,9 @@ class SettingsButton extends StatelessWidget {
 }
 
 class SearchInputBox extends StatelessWidget {
-  const SearchInputBox({Key? key}) : super(key: key);
+  SearchInputBox({Key? key}) : super(key: key);
+
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +86,7 @@ class SearchInputBox extends StatelessWidget {
               }
             },
             child: TextField(
+              controller: _controller,
               onSubmitted: (tags) {
                 context.read<SearchCubit>().search(tags);
               },
@@ -108,6 +111,23 @@ class SearchInputBox extends StatelessWidget {
               },
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                // The ClipOval and Material is required here to prevent
+                // the InkWell from rendering behind the TextField.
+                suffixIcon: ClipOval(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: IconButton(
+                      tooltip: "Clear",
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        _controller.clear();
+                        EasyDebounce.cancel("autocomplete-debounce");
+                        context.read<AutocompleteCubit>().clear();
+                      },
+                    ),
+                  ),
+                ),
                 isDense: true,
                 filled: true,
                 hintText: "Search...",
