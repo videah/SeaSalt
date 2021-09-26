@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -24,9 +27,39 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
           backwardsCompatibility: true,
         ),
         SettingsButton(),
+        if (Platform.isIOS) CancelButton(),
         SearchInputBox(),
         const SearchLoader(),
       ],
+    );
+  }
+}
+
+class CancelButton extends StatelessWidget {
+  const CancelButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SearchBarCubit, SearchBarState>(
+      builder: (context, state) {
+        final isFocused = (state is SearchBarFocused);
+        return Align(
+          alignment: Alignment.centerRight,
+          child: AnimatedOpacity(
+            duration: state.duration,
+            curve: state.curve,
+            opacity: isFocused ? 1 : 0,
+            child: SafeArea(
+              child: CupertinoButton(
+                child: Text("Cancel"),
+                onPressed: () {
+                  context.read<SearchBarCubit>().unfocus();
+                },
+              )
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -41,13 +74,14 @@ class SettingsButton extends StatelessWidget {
         return AnimatedPositioned(
           duration: state.duration,
           curve: state.curve,
-          right: (state is SearchBarUnfocused) ? 5 : -36,
+          right: (state is SearchBarUnfocused) ? 5 : -80,
           top: 7,
           child: SafeArea(
             child: IconButton(
               icon: const Icon(Icons.settings),
               tooltip: "Settings",
               onPressed: () {
+                EasyDebounce.cancel("autocomplete-debounce");
                 Navigator.of(context).pushNamed("/settings");
               },
             ),
@@ -68,6 +102,7 @@ class SearchInputBox extends StatelessWidget {
     return SafeArea(child: BlocBuilder<SearchBarCubit, SearchBarState>(
       builder: (context, state) {
         final isFocused = (state is SearchBarFocused);
+        final offset = Platform.isIOS ? 80.0 : 6.0;
         return AnimatedPadding(
           duration: state.duration,
           curve: state.curve,
@@ -75,7 +110,7 @@ class SearchInputBox extends StatelessWidget {
             top: 8.0,
             left: 6.0,
             bottom: 8.0,
-            right: isFocused ? 6.0 : 50.0,
+            right: isFocused ? offset : 50.0,
           ),
           child: FocusScope(
             onFocusChange: (focused) {
