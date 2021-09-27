@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:seasalt/widgets/post_video_card.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as desktop;
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
@@ -109,19 +110,24 @@ class PostMobileLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(post.file?.ext);
     return ListView(
       children: [
-        InkWell(
-          child: PostImageCard(post: post),
-          onTap: () {
-            Navigator.of(context).push(
-              PageTransition(
-                type: PageTransitionType.fade,
-                child: ImageViewerPage(post: post),
-              ),
-            );
-          },
-        ),
+        if (post.file?.ext == "mp4" || post.file?.ext == "webm") ...[
+          PostVideoCard(post: post),
+        ] else ...[
+          InkWell(
+            child: PostImageCard(post: post),
+            onTap: () {
+              Navigator.of(context).push(
+                PageTransition(
+                  type: PageTransitionType.fade,
+                  child: ImageViewerPage(post: post),
+                ),
+              );
+            },
+          ),
+        ],
         PostTileCollection(post: post),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -161,17 +167,24 @@ class PostTabletLayout extends StatelessWidget {
                       constraints: const BoxConstraints(
                         maxHeight: 690,
                       ),
-                      child: InkWell(
-                        child: PostImageCard(post: post),
-                        onTap: () {
-                          Navigator.of(context).push(
-                            PageTransition(
-                              type: PageTransitionType.fade,
-                              child: ImageViewerPage(post: post),
-                            ),
+                      child: Builder(
+                        builder: (context) {
+                          if (post.file?.ext == "mp4" || post.file?.ext == "webm") {
+                            return PostVideoCard(post: post);
+                          }
+                          return InkWell(
+                            child: PostImageCard(post: post),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: ImageViewerPage(post: post),
+                                ),
+                              );
+                            },
                           );
                         },
-                      ),
+                      )
                     ),
                   ),
                   PostTileCollection(post: post),
