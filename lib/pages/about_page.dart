@@ -10,7 +10,6 @@ class AboutPage extends StatelessWidget {
       appBar: WindowAppBar(
         child: AppBar(
           title: Text("About SeaSalt"),
-          backwardsCompatibility: true,
         ),
       ),
       body: ListView(

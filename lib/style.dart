@@ -66,6 +66,7 @@ final appThemes = {
     "hexagon",
     ThemeData.dark().copyWith(
       primaryColor: "#012e57".toColor(),
+      appBarTheme: AppBarTheme(backgroundColor: "#012e57".toColor()),
       scaffoldBackgroundColor: "#012e57".toColor(),
       canvasColor: "#012e57".toColor(),
       cardColor: "#284a81".toColor(),
@@ -84,6 +85,7 @@ final appThemes = {
     "bloodlust",
     ThemeData.dark().copyWith(
       primaryColor: "#222".toColor(),
+      appBarTheme: AppBarTheme(backgroundColor: "#222".toColor()),
       scaffoldBackgroundColor: "#222".toColor(),
       canvasColor: "#222".toColor(),
       cardColor: "#404040".toColor(),
@@ -94,6 +96,10 @@ final appThemes = {
     "serpent",
     ThemeData.light().copyWith(
       primaryColor: "#dacf6b".toColor(),
+      appBarTheme: AppBarTheme(
+        backgroundColor: "#dacf6b".toColor(),
+        foregroundColor: Colors.black,
+      ),
       scaffoldBackgroundColor: "#dacf6b".toColor(),
       canvasColor: "#dacf6b".toColor(),
       cardColor: "#fff6a5".toColor(),
@@ -110,6 +116,7 @@ final appThemes = {
     "pony",
     ThemeData.dark().copyWith(
       primaryColor: "#2f175c".toColor(),
+      appBarTheme: AppBarTheme(backgroundColor: "#2f175c".toColor()),
       scaffoldBackgroundColor: "#2f175c".toColor(),
       canvasColor: "#2f175c".toColor(),
       cardColor: "#503a7a".toColor(),

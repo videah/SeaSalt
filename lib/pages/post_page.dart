@@ -27,7 +27,6 @@ class PostPage extends StatelessWidget {
       appBar: WindowAppBar(
         child: AppBar(
           title: Text("#${post.id}"),
-          backwardsCompatibility: true,
           actions: [
             IconButton(
               tooltip: "Share",

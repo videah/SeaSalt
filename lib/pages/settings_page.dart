@@ -16,7 +16,6 @@ class SettingsPage extends StatelessWidget {
         appBar: WindowAppBar(
           child: AppBar(
             title: const Text("Settings"),
-            backwardsCompatibility: true,
           ),
         ),
         body: ListView(
