@@ -1,12 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_theme/extended_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:seasalt/cubits/video_player_cubit.dart';
 import 'package:seasalt/pages/post_page.dart';
-import 'package:seasalt/repositories/video_player_repository.dart';
 import 'package:supercharged/supercharged.dart';
 
 import 'package:seasalt/models/post/e6_post.dart';
@@ -44,13 +40,7 @@ class ImageTile extends StatelessWidget {
         if (post != null) {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => VideoPlayerCubit(
-                  repository: VideoPlayerRepository(),
-                  post: post!,
-                ),
-                child: PostPage(post: post!),
-              )
+              builder: (context) => PostPage(post: post!)
             ),
           );
         }

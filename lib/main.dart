@@ -91,7 +91,7 @@ class SeaSalt extends StatelessWidget {
       availableThemes: appThemes,
       themeBuilder: (context, appTheme) {
         return ThemeProvider(
-          initTheme: appTheme.material,
+          initTheme: appTheme.material!,
           builder: (context, theme) {
             return MaterialApp(
               title: "SeaSalt",

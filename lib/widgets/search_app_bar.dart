@@ -26,8 +26,8 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
         AppBar(
           backwardsCompatibility: true,
         ),
-        SettingsButton(),
         if (Platform.isIOS) CancelButton(),
+        SettingsButton(),
         SearchInputBox(),
         const SearchLoader(),
       ],
@@ -75,7 +75,7 @@ class SettingsButton extends StatelessWidget {
           duration: state.duration,
           curve: state.curve,
           right: (state is SearchBarUnfocused) ? 5 : -80,
-          top: 7,
+          top: 4,
           child: SafeArea(
             child: IconButton(
               icon: const Icon(Icons.settings),
@@ -107,7 +107,7 @@ class SearchInputBox extends StatelessWidget {
           duration: state.duration,
           curve: state.curve,
           padding: EdgeInsets.only(
-            top: 8.0,
+            top: 4.0,
             left: 6.0,
             bottom: 8.0,
             right: isFocused ? offset : 50.0,

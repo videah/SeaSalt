@@ -7,7 +7,7 @@ import 'package:seasalt/style.dart';
 /// A circular button that switches to a [ThemeData] with a fancy animation.
 class ThemeSelectButton extends StatelessWidget {
   /// The [AppTheme] the button is used to switch to.
-  final AppTheme? theme;
+  final AppTheme theme;
 
   /// The display name of the theme.
   ///
@@ -22,7 +22,7 @@ class ThemeSelectButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool hideCheck =
-        (Theme.of(context).primaryColor != theme?.material?.primaryColor);
+        (Theme.of(context).primaryColor != theme.material?.primaryColor);
     return ThemeSwitcher(
       builder: (context) {
         return Tooltip(
@@ -30,7 +30,7 @@ class ThemeSelectButton extends StatelessWidget {
           verticalOffset: 36,
           child: TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: theme?.material?.primaryColor,
+              backgroundColor: theme.material?.primaryColor,
               shape: const CircleBorder(
                 side: BorderSide(
                   color: Colors.white,
@@ -48,11 +48,11 @@ class ThemeSelectButton extends StatelessWidget {
             onPressed: () {
               // Write the new theme to storage.
               var box = Hive.box("settings");
-              box.put("theme", theme?.name);
+              box.put("theme", theme.name);
 
               // Switch to the new theme in the current session.
-              ThemeSwitcher.of(context)?.changeTheme(
-                theme: theme?.material,
+              ThemeSwitcher.of(context).changeTheme(
+                theme: theme.material!,
               );
             },
           ),

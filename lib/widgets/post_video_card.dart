@@ -1,8 +1,5 @@
+import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
-import 'package:chewie/chewie.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seasalt/cubits/video_player_cubit.dart';
-import 'package:seasalt/cubits/video_player_state.dart';
 
 import 'package:seasalt/models/post/e6_post.dart';
 
@@ -16,15 +13,7 @@ class PostVideoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Hero(
       tag: "${post.id}",
-      child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
-        builder: (context, state) {
-          if (state is VideoSuccess) {
-            return Chewie(controller: state.chewieController);
-          } else {
-            return Container();
-          }
-        },
-      ),
+      child: BetterPlayer.network("${post.file?.url}")
     );
   }
 }
