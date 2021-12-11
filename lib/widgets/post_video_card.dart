@@ -11,9 +11,6 @@ class PostVideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: "${post.id}",
-      child: BetterPlayer.network("${post.file?.url}")
-    );
+    return BetterPlayer.network("${post.file?.url}");
   }
 }
