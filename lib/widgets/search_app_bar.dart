@@ -23,8 +23,7 @@ class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AppBar(
-        ),
+        AppBar(),
         if (Platform.isIOS) CancelButton(),
         SettingsButton(),
         SearchInputBox(),
@@ -49,12 +48,14 @@ class CancelButton extends StatelessWidget {
             curve: state.curve,
             opacity: isFocused ? 1 : 0,
             child: SafeArea(
-                child: CupertinoButton(
-              child: Text("Cancel"),
-              onPressed: () {
-                context.read<SearchBarCubit>().unfocus();
-              },
-            )),
+              child: CupertinoButton(
+                child: Text("Cancel"),
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  context.read<SearchBarCubit>().unfocus();
+                },
+              ),
+            ),
           ),
         );
       },
