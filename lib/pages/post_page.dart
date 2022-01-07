@@ -1,6 +1,8 @@
 import 'dart:io' show Platform;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:seasalt/widgets/post_source_card.dart';
@@ -29,9 +31,9 @@ class PostPage extends StatelessWidget {
         child: AppBar(
           title: Text("#${post.id}"),
           actions: [
-            IconButton(
-              tooltip: "Share",
+            PlatformIconButton(
               icon: Icon(Icons.share),
+              cupertinoIcon: Icon(CupertinoIcons.share),
               onPressed: () => Share.share("https://e621.net/posts/${post.id}"),
             ),
             PopupMenuButton(

@@ -48,6 +48,7 @@ dependencies:
   easy_debounce: ^2.0.0
   flutter_custom_tabs: ^1.0.3
   better_player: ^0.0.79
+  flutter_platform_widgets: ^1.12.1
   video_player_windows: # TODO: Remove this https://github.com/flutter/flutter/issues/37673
     git:
       url: https://github.com/anirudhb/flutter_packages.git
