@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:seasalt/widgets/post_source_card.dart';
 import 'package:seasalt/widgets/post_video_card.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as desktop;
@@ -131,7 +132,8 @@ class PostMobileLayout extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TagColumn(tags: post.tags!, dense: true),
-        )
+        ),
+        PostSourceCard(sourceURLs: post.sources!),
       ],
     );
   }
