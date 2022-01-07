@@ -18,6 +18,8 @@ class PostImageCard extends StatelessWidget {
         image: CachedNetworkImageProvider(
           post.file?.url ?? "https://i.imgur.com/TVJnMuP.png",
         ),
+        fadeOutDuration: const Duration(seconds: 0),
+        fadeInDuration: const Duration(seconds: 0),
         placeholderBuilder: (context) {
           return OctoImage(
             width: double.infinity,
@@ -25,6 +27,8 @@ class PostImageCard extends StatelessWidget {
             image: CachedNetworkImageProvider(
               post.sample?.url ?? "https://i.imgur.com/TVJnMuP.png",
             ),
+            fadeOutDuration: const Duration(seconds: 0),
+            fadeInDuration: const Duration(seconds: 0),
             placeholderBuilder: (context) {
               return OctoImage(
                 width: double.infinity,
@@ -32,6 +36,8 @@ class PostImageCard extends StatelessWidget {
                 image: CachedNetworkImageProvider(
                   post.preview?.url ?? "https://i.imgur.com/TVJnMuP.png",
                 ),
+                fadeOutDuration: const Duration(seconds: 0),
+                fadeInDuration: const Duration(seconds: 0),
               );
             },
           );

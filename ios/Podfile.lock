@@ -2,7 +2,9 @@ PODS:
   - better_player (0.0.1):
     - Cache (~> 6.0.0)
     - Flutter
+    - GCDWebServer
     - HLSCachingReverseProxyServer
+    - PINCache
   - Cache (6.0.0)
   - Flutter (1.0.0)
   - flutter_custom_tabs (0.0.1):
@@ -79,7 +81,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/wakelock/ios"
 
 SPEC CHECKSUMS:
-  better_player: 5f77b030c433bd39af0aaaffc184cf4267601a84
+  better_player: 2406bfe8175203c7a46fa15f9d778d73b12e1646
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_custom_tabs: 7a10a08686955cb748e5d26e0ae586d30689bf89
