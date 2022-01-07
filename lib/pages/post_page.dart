@@ -15,7 +15,7 @@ import 'package:seasalt/widgets/desktop_title_bar.dart';
 import 'package:seasalt/widgets/post_image_card.dart';
 import 'package:seasalt/widgets/tag_column.dart';
 
-enum PostAction { report }
+enum PostAction { report, browser }
 
 class PostPage extends StatelessWidget {
   final E6Post post;
@@ -32,13 +32,17 @@ class PostPage extends StatelessWidget {
             IconButton(
               tooltip: "Share",
               icon: Icon(Icons.share),
-              onPressed: () => Share.share("${post.file?.url}"),
+              onPressed: () => Share.share("https://e621.net/posts/${post.id}"),
             ),
             PopupMenuButton(
               itemBuilder: (context) => [
                 PopupMenuItem<PostAction>(
                   value: PostAction.report,
                   child: Text("Report Post"),
+                ),
+                PopupMenuItem<PostAction>(
+                  value: PostAction.browser,
+                  child: Text("Open in browser"),
                 ),
               ],
               onSelected: (PostAction action) async {
@@ -54,6 +58,21 @@ class PostPage extends StatelessWidget {
                   } else {
                     desktop.launch(
                       "https://e621.net/tickets/new?disp_id=${post.id}&type=post",
+                    );
+                  }
+                }
+                if (action == PostAction.browser) {
+                  if (Platform.isIOS || Platform.isAndroid) {
+                    await launch(
+                      "https://e621.net/posts/${post.id}",
+                      customTabsOption: CustomTabsOption(
+                        toolbarColor: Theme.of(context).primaryColor,
+                        enableDefaultShare: true,
+                      ),
+                    );
+                  } else {
+                    desktop.launch(
+                      "https://e621.net/posts/${post.id}",
                     );
                   }
                 }
@@ -126,6 +145,7 @@ class PostMobileLayout extends StatelessWidget {
                 ),
               );
             },
+            onLongPress: () => Share.share("${post.file?.url}"),
           ),
         ],
         PostTileCollection(post: post),
