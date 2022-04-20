@@ -6,16 +6,14 @@ part of 'post_flags.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostFlags _$PostFlagsFromJson(Map<String, dynamic> json) {
-  return PostFlags(
-    pending: json['pending'] as bool?,
-    flagged: json['flagged'] as bool?,
-    noteLocked: json['note_locked'] as bool?,
-    statusLocked: json['status_locked'] as bool?,
-    ratingLocked: json['rating_locked'] as bool?,
-    deleted: json['deleted'] as bool?,
-  );
-}
+PostFlags _$PostFlagsFromJson(Map<String, dynamic> json) => PostFlags(
+      pending: json['pending'] as bool?,
+      flagged: json['flagged'] as bool?,
+      noteLocked: json['note_locked'] as bool?,
+      statusLocked: json['status_locked'] as bool?,
+      ratingLocked: json['rating_locked'] as bool?,
+      deleted: json['deleted'] as bool?,
+    );
 
 Map<String, dynamic> _$PostFlagsToJson(PostFlags instance) {
   final val = <String, dynamic>{};

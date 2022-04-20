@@ -6,47 +6,45 @@ part of 'e6_post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-E6Post _$E6PostFromJson(Map<String, dynamic> json) {
-  return E6Post(
-    id: json['id'] as int?,
-    file: json['file'] == null
-        ? null
-        : PostFile.fromJson(json['file'] as Map<String, dynamic>),
-    preview: json['preview'] == null
-        ? null
-        : PostPreview.fromJson(json['preview'] as Map<String, dynamic>),
-    sample: json['sample'] == null
-        ? null
-        : PostSample.fromJson(json['sample'] as Map<String, dynamic>),
-    score: json['score'] == null
-        ? null
-        : PostScore.fromJson(json['score'] as Map<String, dynamic>),
-    tags: json['tags'] == null
-        ? null
-        : PostTags.fromJson(json['tags'] as Map<String, dynamic>),
-    lockedTags: (json['locked_tags'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList(),
-    changeSeq: json['change_seq'] as int?,
-    flags: json['flags'] == null
-        ? null
-        : PostFlags.fromJson(json['flags'] as Map<String, dynamic>),
-    rating: _$enumDecodeNullable(_$PostRatingEnumMap, json['rating']),
-    favCount: json['fav_count'] as int?,
-    sources:
-        (json['sources'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    pools: (json['pools'] as List<dynamic>?)?.map((e) => e as int).toList(),
-    relationships: json['relationships'] == null
-        ? null
-        : PostRelationships.fromJson(
-            json['relationships'] as Map<String, dynamic>),
-    approverId: json['approver_id'] as int?,
-    uploaderId: json['uploader_id'] as int?,
-    description: json['description'] as String?,
-    commentCount: json['comment_count'] as int?,
-    isFavorited: json['is_favorited'] as bool?,
-  );
-}
+E6Post _$E6PostFromJson(Map<String, dynamic> json) => E6Post(
+      id: json['id'] as int?,
+      file: json['file'] == null
+          ? null
+          : PostFile.fromJson(json['file'] as Map<String, dynamic>),
+      preview: json['preview'] == null
+          ? null
+          : PostPreview.fromJson(json['preview'] as Map<String, dynamic>),
+      sample: json['sample'] == null
+          ? null
+          : PostSample.fromJson(json['sample'] as Map<String, dynamic>),
+      score: json['score'] == null
+          ? null
+          : PostScore.fromJson(json['score'] as Map<String, dynamic>),
+      tags: json['tags'] == null
+          ? null
+          : PostTags.fromJson(json['tags'] as Map<String, dynamic>),
+      lockedTags: (json['locked_tags'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      changeSeq: json['change_seq'] as int?,
+      flags: json['flags'] == null
+          ? null
+          : PostFlags.fromJson(json['flags'] as Map<String, dynamic>),
+      rating: $enumDecodeNullable(_$PostRatingEnumMap, json['rating']),
+      favCount: json['fav_count'] as int?,
+      sources:
+          (json['sources'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      pools: (json['pools'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      relationships: json['relationships'] == null
+          ? null
+          : PostRelationships.fromJson(
+              json['relationships'] as Map<String, dynamic>),
+      approverId: json['approver_id'] as int?,
+      uploaderId: json['uploader_id'] as int?,
+      description: json['description'] as String?,
+      commentCount: json['comment_count'] as int?,
+      isFavorited: json['is_favorited'] as bool?,
+    );
 
 Map<String, dynamic> _$E6PostToJson(E6Post instance) {
   final val = <String, dynamic>{};
@@ -77,43 +75,6 @@ Map<String, dynamic> _$E6PostToJson(E6Post instance) {
   writeNotNull('comment_count', instance.commentCount);
   writeNotNull('is_favorited', instance.isFavorited);
   return val;
-}
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$PostRatingEnumMap = {

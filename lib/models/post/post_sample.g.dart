@@ -6,14 +6,12 @@ part of 'post_sample.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostSample _$PostSampleFromJson(Map<String, dynamic> json) {
-  return PostSample(
-    has: json['has'] as bool?,
-    width: json['width'] as int?,
-    height: json['height'] as int?,
-    url: json['url'] as String?,
-  );
-}
+PostSample _$PostSampleFromJson(Map<String, dynamic> json) => PostSample(
+      has: json['has'] as bool?,
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      url: json['url'] as String?,
+    );
 
 Map<String, dynamic> _$PostSampleToJson(PostSample instance) {
   final val = <String, dynamic>{};

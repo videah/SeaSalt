@@ -115,7 +115,6 @@ class SignInCard extends StatelessWidget {
                       ),
                     );
                   }
-
                   if (state is LoginSuccess) {
                     Navigator.of(context).pop(true);
                   }

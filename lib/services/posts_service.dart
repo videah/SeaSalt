@@ -12,4 +12,8 @@ abstract class Posts {
   Future<Response<PostResponse>> getPostsWithTags(
     @Query("tags") String tags,
   );
+
+  Future<Response<PostResponse>> getPostsWithPool(int poolId) {
+    return getPostsWithTags("pool:$poolId");
+  }
 }

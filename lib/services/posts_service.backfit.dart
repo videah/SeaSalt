@@ -19,11 +19,19 @@ class PostsService extends Posts with _$Posts {
 mixin _$Posts implements Posts {
   BackfitClient? _client;
 
+  final List<int> _validStatuses = [
+    HttpStatus.ok,
+    HttpStatus.created,
+    HttpStatus.accepted,
+    HttpStatus.nonAuthoritativeInformation,
+    HttpStatus.partialContent,
+  ];
+
   @override
   Future<Response<PostResponse>> getPosts() async {
     final res = await _client!.get(Uri.parse('${_client!.baseUrl}/posts.json'));
     return Response(
-      data: res.body.isNotEmpty
+      data: _validStatuses.contains(res.statusCode) && res.body.isNotEmpty
           ? PostResponse.fromJson(json.decode(res.body))
           : null,
       statusCode: res.statusCode,
@@ -37,7 +45,7 @@ mixin _$Posts implements Posts {
     final res = await _client!
         .get(Uri.parse('${_client!.baseUrl}/posts.json?tags=$tags'));
     return Response(
-      data: res.body.isNotEmpty
+      data: _validStatuses.contains(res.statusCode) && res.body.isNotEmpty
           ? PostResponse.fromJson(json.decode(res.body))
           : null,
       statusCode: res.statusCode,

@@ -2,9 +2,13 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:seasalt/cubits/post_cubit.dart';
+import 'package:seasalt/cubits/post_state.dart';
+import 'package:seasalt/pages/pool_overview_page.dart';
 import 'package:seasalt/widgets/post_source_card.dart';
 import 'package:seasalt/widgets/post_video_card.dart';
 import 'package:share_plus/share_plus.dart';
@@ -22,7 +26,7 @@ enum PostAction { report, browser }
 class PostPage extends StatelessWidget {
   final E6Post post;
 
-  const PostPage({Key? key, required this.post}) : super(key: key);
+  PostPage({Key? key, required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,30 @@ class PostPage extends StatelessWidget {
         child: AppBar(
           title: Text("#${post.id}"),
           actions: [
+            if (post.pools!.isNotEmpty) ...[
+              BlocBuilder<PostCubit, PostState>(
+                builder: (context, state) {
+                  if (state is PostPool) {
+                    return PlatformIconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () async {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => PoolOverviewPage(
+                              posts: state.posts,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return PlatformIconButton(
+                      icon: Icon(Icons.search),
+                    );
+                  }
+                },
+              )
+            ],
             PlatformIconButton(
               icon: Icon(Icons.share),
               cupertinoIcon: Icon(CupertinoIcons.share),
@@ -86,7 +114,27 @@ class PostPage extends StatelessWidget {
       body: ResponsiveBuilder(
         builder: (context, info) {
           if (info.deviceScreenType == DeviceScreenType.mobile) {
-            return PostMobileLayout(post: post);
+            return BlocBuilder<PostCubit, PostState>(
+              builder: (context, state) {
+                if (state is PostPool) {
+                  // We should probably be doing this elsewhere but atm it's
+                  // unlikely for this to be rebuilt so it should be ok.
+                  final PageController _pageController = PageController(
+                    initialPage: state.initialPostIndex,
+                  );
+                  return PageView.builder(
+                    controller: _pageController,
+                    itemCount: state.posts?.length,
+                    itemBuilder: (context, i) {
+                      return PostMobileLayout(
+                        post: state.posts![i],
+                      );
+                    },
+                  );
+                }
+                return PostMobileLayout(post: post);
+              },
+            );
           } else {
             return PostTabletLayout(post: post);
           }
@@ -131,7 +179,6 @@ class PostMobileLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(post.file?.ext);
     return ListView(
       children: [
         if (post.file?.ext == "mp4" || post.file?.ext == "webm") ...[
@@ -192,7 +239,8 @@ class PostTabletLayout extends StatelessWidget {
                       ),
                       child: Builder(
                         builder: (context) {
-                          if (post.file?.ext == "mp4" || post.file?.ext == "webm") {
+                          if (post.file?.ext == "mp4" ||
+                              post.file?.ext == "webm") {
                             return PostVideoCard(post: post);
                           }
                           return InkWell(
@@ -207,7 +255,7 @@ class PostTabletLayout extends StatelessWidget {
                             },
                           );
                         },
-                      )
+                      ),
                     ),
                   ),
                   PostTileCollection(post: post),

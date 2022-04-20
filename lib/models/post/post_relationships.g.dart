@@ -6,15 +6,14 @@ part of 'post_relationships.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostRelationships _$PostRelationshipsFromJson(Map<String, dynamic> json) {
-  return PostRelationships(
-    parentId: json['parent_id'] as int?,
-    hasChildren: json['has_children'] as bool?,
-    hasActiveChildren: json['has_active_children'] as bool?,
-    children:
-        (json['children'] as List<dynamic>?)?.map((e) => e as int).toList(),
-  );
-}
+PostRelationships _$PostRelationshipsFromJson(Map<String, dynamic> json) =>
+    PostRelationships(
+      parentId: json['parent_id'] as int?,
+      hasChildren: json['has_children'] as bool?,
+      hasActiveChildren: json['has_active_children'] as bool?,
+      children:
+          (json['children'] as List<dynamic>?)?.map((e) => e as int).toList(),
+    );
 
 Map<String, dynamic> _$PostRelationshipsToJson(PostRelationships instance) {
   final val = <String, dynamic>{};

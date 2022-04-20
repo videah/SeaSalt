@@ -6,13 +6,11 @@ part of 'post_preview.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostPreview _$PostPreviewFromJson(Map<String, dynamic> json) {
-  return PostPreview(
-    width: json['width'] as int?,
-    height: json['height'] as int?,
-    url: json['url'] as String?,
-  );
-}
+PostPreview _$PostPreviewFromJson(Map<String, dynamic> json) => PostPreview(
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      url: json['url'] as String?,
+    );
 
 Map<String, dynamic> _$PostPreviewToJson(PostPreview instance) {
   final val = <String, dynamic>{};

@@ -6,13 +6,11 @@ part of 'post_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostResponse _$PostResponseFromJson(Map<String, dynamic> json) {
-  return PostResponse(
-    posts: (json['posts'] as List<dynamic>?)
-        ?.map((e) => E6Post.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+PostResponse _$PostResponseFromJson(Map<String, dynamic> json) => PostResponse(
+      posts: (json['posts'] as List<dynamic>?)
+          ?.map((e) => E6Post.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$PostResponseToJson(PostResponse instance) {
   final val = <String, dynamic>{};

@@ -6,16 +6,14 @@ part of 'post_file.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostFile _$PostFileFromJson(Map<String, dynamic> json) {
-  return PostFile(
-    width: json['width'] as int?,
-    height: json['height'] as int?,
-    ext: json['ext'] as String?,
-    size: json['size'] as int?,
-    md5: json['md5'] as String?,
-    url: json['url'] as String?,
-  );
-}
+PostFile _$PostFileFromJson(Map<String, dynamic> json) => PostFile(
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      ext: json['ext'] as String?,
+      size: json['size'] as int?,
+      md5: json['md5'] as String?,
+      url: json['url'] as String?,
+    );
 
 Map<String, dynamic> _$PostFileToJson(PostFile instance) {
   final val = <String, dynamic>{};

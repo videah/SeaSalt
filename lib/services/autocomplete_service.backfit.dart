@@ -19,6 +19,14 @@ class AutocompleteService extends Autocomplete with _$Autocomplete {
 mixin _$Autocomplete implements Autocomplete {
   BackfitClient? _client;
 
+  final List<int> _validStatuses = [
+    HttpStatus.ok,
+    HttpStatus.created,
+    HttpStatus.accepted,
+    HttpStatus.nonAuthoritativeInformation,
+    HttpStatus.partialContent,
+  ];
+
   @override
   Future<Response<List<AutocompleteTag>>> getAutocompleteResults(
       String tag) async {
@@ -26,7 +34,7 @@ mixin _$Autocomplete implements Autocomplete {
         '${_client!.baseUrl}/tags/autocomplete.json?search[name_matches]=$tag'));
 
     return Response(
-      data: res.body.isNotEmpty
+      data: _validStatuses.contains(res.statusCode) && res.body.isNotEmpty
           ? (json.decode(res.body) as List)
               .map((it) => AutocompleteTag.fromJson(it))
               .toList()

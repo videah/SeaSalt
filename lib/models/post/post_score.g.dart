@@ -6,13 +6,11 @@ part of 'post_score.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostScore _$PostScoreFromJson(Map<String, dynamic> json) {
-  return PostScore(
-    up: json['up'] as int?,
-    down: json['down'] as int?,
-    total: json['total'] as int?,
-  );
-}
+PostScore _$PostScoreFromJson(Map<String, dynamic> json) => PostScore(
+      up: json['up'] as int?,
+      down: json['down'] as int?,
+      total: json['total'] as int?,
+    );
 
 Map<String, dynamic> _$PostScoreToJson(PostScore instance) {
   final val = <String, dynamic>{};
